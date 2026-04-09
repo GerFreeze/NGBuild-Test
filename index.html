@@ -342,12 +342,13 @@ input, textarea, select { font-family: inherit; }
 }
 .hero-headline .cursor {
   display: inline-block;
-  width: 3px;
-  height: .85em;
-  background: var(--cyan);
+  width: 2px;
+  height: .75em;
+  background: #64748b;
   margin-left: 4px;
-  animation: blink .8s step-end infinite;
-  vertical-align: text-bottom;
+  animation: blink 1.2s step-end infinite;
+  vertical-align: baseline;
+  margin-bottom: -.1em;
 }
 @keyframes blink { 50% { opacity: 0; } }
 .hero-sub {
@@ -367,14 +368,13 @@ input, textarea, select { font-family: inherit; }
 }
 /* ===== HERO LOGO SHATTER ===== */
 #logo-shatter {
-  position: absolute;
-  top: 0;
+  position: fixed;
+  top: var(--nav-height);
   right: 0;
   bottom: 0;
   left: 42%;
-  z-index: 0;
+  z-index: 2;
   pointer-events: none;
-  overflow: hidden;
   opacity: 0.32;
 }
 .shard {
@@ -493,37 +493,63 @@ input, textarea, select { font-family: inherit; }
 .process-line-fill {
   height: 100%;
   width: 0%;
-  background-image: linear-gradient(90deg,
-    #1d4ed8 0%, #2563eb 6%, #93c5fd 14%, #e0f9ff 19%,
-    #93c5fd 24%, #2563eb 32%, #1d4ed8 45%,
-    #2563eb 56%, #7dd3fc 64%, #e0f9ff 69%,
-    #7dd3fc 74%, #38bdf8 82%, #1d4ed8 100%
-  );
-  background-size: 200% 100%;
-  animation: pulseWave 2.5s linear infinite;
+  background: linear-gradient(90deg, #1d4ed8, #2563eb);
   transition: width 1s ease;
-}
-@keyframes pulseWave {
-  from { background-position: 0% center; }
-  to   { background-position: 100% center; }
 }
 @keyframes cpuPulse {
   0%, 100% {
-    filter: drop-shadow(0 0 8px rgba(37,99,235,.65)) drop-shadow(0 0 2px rgba(56,189,248,.45));
-  }
-  48%, 52% {
     filter: drop-shadow(0 0 24px rgba(37,99,235,1)) drop-shadow(0 0 12px rgba(56,189,248,.95)) drop-shadow(0 0 42px rgba(56,189,248,.4));
+  }
+  50% {
+    filter: drop-shadow(0 0 8px rgba(37,99,235,.65)) drop-shadow(0 0 2px rgba(56,189,248,.45));
   }
 }
 @keyframes coreGlow {
-  0%, 100% { stroke-opacity: 0.5; }
-  48%, 52% { stroke-opacity: 1; }
+  0%, 100% { stroke-opacity: 1; }
+  50% { stroke-opacity: 0.5; }
+}
+@keyframes webLoad {
+  0%, 88%  { transform: scaleX(0); opacity: 0; }
+  90%      { transform: scaleX(0); opacity: 1; }
+  96%      { transform: scaleX(1); opacity: 1; }
+  99%      { transform: scaleX(1); opacity: 0; }
+  100%     { transform: scaleX(0); opacity: 0; }
+}
+.web-load-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: webLoad 5s linear infinite;
+}
+/* ===== EINHEITLICHER BEAM (SVG-Pfad) ===== */
+.pv-connectors {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  position: relative;
+  overflow: visible;
+}
+.pv-beam-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 72px;
+  overflow: visible;
+  pointer-events: none;
+  z-index: 5;
+}
+/* CPU rechte Pins leuchten beim Beam-Start auf */
+.cpu-pin-r {
+  animation: pinLaunch 5s ease-in-out infinite;
+}
+@keyframes pinLaunch {
+  0%, 92%, 100% { stroke: #e0f9ff; stroke-width: 2.2; }
+  35%           { stroke: #38bdf8; stroke-width: 1.5; }
 }
 .pv-cpu svg {
-  animation: cpuPulse 2.5s ease-in-out infinite;
+  animation: cpuPulse 5s ease-in-out infinite;
 }
 .cpu-core-glow {
-  animation: coreGlow 2.5s ease-in-out infinite;
+  animation: coreGlow 5s ease-in-out infinite;
 }
 .process-step {
   flex: 1;
@@ -576,7 +602,7 @@ input, textarea, select { font-family: inherit; }
 }
 .pv-icon svg { display: block; }
 .pv-web svg {
-  filter: drop-shadow(0 0 10px rgba(37,99,235,.6)) drop-shadow(0 0 3px rgba(56,189,248,.45));
+  filter: drop-shadow(0 0 6px rgba(37,99,235,.45));
 }
 .pv-label {
   font-size: .68rem;
@@ -599,19 +625,12 @@ input, textarea, select { font-family: inherit; }
 .pv-wire-fill {
   position: absolute;
   inset: 0;
-  background-image: linear-gradient(90deg,
-    #1d4ed8 0%, #2563eb 6%, #93c5fd 14%, #e0f9ff 19%,
-    #93c5fd 24%, #2563eb 32%, #1d4ed8 45%,
-    #2563eb 56%, #7dd3fc 64%, #e0f9ff 69%,
-    #7dd3fc 74%, #38bdf8 82%, #1d4ed8 100%
-  );
-  background-size: 200% 100%;
-  animation: pulseWave 2.5s linear infinite;
+  background: #2563eb;
   width: 0%;
   transition: width .5s ease;
 }
 @media (max-width: 900px) {
-  .pv-icon, .pv-wire { display: none; }
+  .pv-icon, .pv-wire, .pv-beam-svg { display: none; }
 }
 @media (max-width: 768px) {
   .process-track { flex-direction: column; gap: 40px; }
@@ -715,6 +734,196 @@ input, textarea, select { font-family: inherit; }
   font-size: .85rem;
   margin-top: 4px;
 }
+
+/* ===== FOLDER PORTFOLIO ===== */
+@media (min-width: 901px) { .portfolio-grid { display: none; } }
+@media (max-width: 900px)  { .pf-wrap      { display: none; } }
+.pf-wrap {
+  display: flex;
+  justify-content: center;
+  padding: 40px 0 160px;
+  overflow: visible;
+}
+.pf-folder {
+  position: relative;
+  width: 300px;
+  cursor: pointer;
+  user-select: none;
+}
+.pf-tab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 130px;
+  height: 26px;
+  padding: 0 12px;
+  margin-left: 12px;
+  background: #142440;
+  border: 1px solid rgba(37,99,235,.3);
+  border-bottom: none;
+  border-radius: 8px 8px 0 0;
+  font-size: .68rem;
+  font-weight: 600;
+  color: var(--blue-light);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+.pf-body {
+  position: relative;
+  width: 300px;
+  height: 200px;
+  background: #0d1b35;
+  border: 1px solid rgba(37,99,235,.3);
+  border-radius: 0 8px 8px 8px;
+  box-shadow: 0 8px 48px rgba(0,0,0,.5), 0 0 28px rgba(37,99,235,.08);
+  overflow: visible;
+}
+/* Hint text (closed) */
+.pf-hint {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--text-muted);
+  font-size: .82rem;
+  transition: opacity .25s;
+  pointer-events: none;
+  z-index: 12;
+}
+.pf-hint svg { opacity: .4; }
+.pf-folder.open .pf-hint { opacity: 0; }
+/* Folder front cover */
+.pf-front {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, #1c3260 0%, #0f2040 100%);
+  border-radius: 0 8px 8px 8px;
+  border: 1px solid rgba(37,99,235,.4);
+  z-index: 11;
+  transition: transform .42s cubic-bezier(.4,0,.2,1), opacity .35s ease;
+  pointer-events: none;
+}
+.pf-folder.open .pf-front {
+  transform: translateY(-108%) scaleY(.45);
+  opacity: 0;
+}
+/* Portfolio cards inside folder */
+.pf-card {
+  position: absolute;
+  width: 250px;
+  height: 182px;
+  background: var(--surface);
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: var(--radius);
+  overflow: hidden;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: transform .52s cubic-bezier(.34,1.3,.64,1), box-shadow .3s, border-color .3s;
+  will-change: transform;
+}
+.pf-card-1 { z-index: 3; transition-delay: .04s; }
+.pf-card-2 { z-index: 2; transition-delay: .08s; }
+.pf-card-3 { z-index: 1; transition-delay: .12s; }
+/* Open: fan out with magnetic variable */
+.pf-folder.open .pf-card-1 {
+  transform: translateX(calc(-50% - 295px + var(--mx,0px))) translateY(calc(-85px + var(--my,0px))) rotate(-10deg);
+  transition-delay: .04s;
+}
+.pf-folder.open .pf-card-2 {
+  transform: translateX(calc(-50% + var(--mx,0px))) translateY(calc(-195px + var(--my,0px)));
+  transition-delay: 0s;
+}
+.pf-folder.open .pf-card-3 {
+  transform: translateX(calc(-50% + 295px + var(--mx,0px))) translateY(calc(-85px + var(--my,0px))) rotate(10deg);
+  transition-delay: .08s;
+}
+.pf-folder.open .pf-card:hover {
+  border-color: rgba(37,99,235,.5);
+  box-shadow: 0 20px 60px rgba(0,0,0,.55), 0 0 0 1px rgba(37,99,235,.25);
+}
+/* Mini mockup inside card */
+.pf-card-mock {
+  height: 55%;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  border-bottom: 1px solid rgba(255,255,255,.05);
+}
+.pf-mock-bar {
+  display: flex;
+  gap: 4px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(255,255,255,.05);
+}
+.pf-mock-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.12);
+}
+.pf-mock-lines {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  justify-content: center;
+}
+.pf-mock-line {
+  height: 5px;
+  border-radius: 3px;
+  background: rgba(255,255,255,.05);
+}
+.pf-card-info {
+  padding: 10px 12px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.pf-card-tag {
+  font-size: .66rem;
+  color: var(--blue-light);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  font-weight: 600;
+}
+.pf-card-title {
+  font-size: .92rem;
+  font-weight: 600;
+}
+/* Hover overlay (only when folder is open) */
+.pf-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(6,8,15,.88);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  opacity: 0;
+  transition: opacity .25s;
+}
+.pf-folder.open .pf-card:hover .pf-card-overlay { opacity: 1; }
+.pf-card-overlay h3 { font-size: 1rem; font-weight: 600; }
+.pf-card-overlay .btn-ghost { padding: 7px 18px; font-size: .8rem; }
+/* Close hint below folder */
+.pf-close-hint {
+  position: absolute;
+  bottom: -34px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: .72rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity .3s .25s;
+  pointer-events: none;
+}
+.pf-folder.open .pf-close-hint { opacity: 1; }
 
 /* ===== ABOUT ===== */
 .about-grid {
@@ -1055,54 +1264,8 @@ input, textarea, select { font-family: inherit; }
     <span style="bottom:12%;right:22%">11001100</span>
   </div>
 
-  <!-- NG Logo: maskierte Risse nur innerhalb der Buchstaben; Shards = Neon-Rand -->
-  <div id="logo-shatter" aria-hidden="true">
-    <!-- Shard 1: oben-links -->
-    <div class="shard" data-tx="-200" data-ty="-130" data-rot="-18"
-         style="clip-path:polygon(0% 0%, 40% 0%, 43% 7%, 37% 13%, 44% 19%, 38% 25%, 43% 31%, 38% 35%, 33% 36%, 25% 32%, 17% 36%, 9% 31%, 0% 34%)">
-      <div class="shard-inner">NG</div>
-    </div>
-    <!-- Shard 2: oben-mitte -->
-    <div class="shard" data-tx="0" data-ty="-180" data-rot="10"
-         style="clip-path:polygon(40% 0%, 62% 0%, 66% 8%, 59% 14%, 65% 21%, 61% 28%, 66% 34%, 62% 36%, 54% 36%, 46% 33%, 38% 35%, 43% 31%, 38% 25%, 44% 19%, 37% 13%, 43% 7%)">
-      <div class="shard-inner">NG</div>
-    </div>
-    <!-- Shard 3: oben-rechts -->
-    <div class="shard" data-tx="200" data-ty="-120" data-rot="22"
-         style="clip-path:polygon(62% 0%, 100% 0%, 100% 34%, 94% 36%, 86% 32%, 78% 36%, 70% 32%, 62% 36%, 66% 34%, 61% 28%, 65% 21%, 59% 14%, 66% 8%)">
-      <div class="shard-inner">NG</div>
-    </div>
-    <!-- Shard 4: mitte-links -->
-    <div class="shard" data-tx="-240" data-ty="0" data-rot="-25"
-         style="clip-path:polygon(0% 34%, 9% 31%, 17% 36%, 25% 32%, 33% 36%, 38% 35%, 36% 42%, 42% 49%, 35% 55%, 41% 62%, 37% 67%, 31% 68%, 23% 64%, 16% 67%, 8% 63%, 0% 66%)">
-      <div class="shard-inner">NG</div>
-    </div>
-    <!-- Shard 5: mitte-mitte -->
-    <div class="shard" data-tx="0" data-ty="-55" data-rot="6"
-         style="clip-path:polygon(38% 35%, 46% 33%, 54% 36%, 62% 36%, 59% 43%, 65% 50%, 60% 57%, 65% 63%, 61% 67%, 53% 68%, 45% 65%, 37% 67%, 41% 62%, 35% 55%, 42% 49%, 36% 42%)">
-      <div class="shard-inner">NG</div>
-    </div>
-    <!-- Shard 6: mitte-rechts -->
-    <div class="shard" data-tx="240" data-ty="0" data-rot="25"
-         style="clip-path:polygon(62% 36%, 70% 32%, 78% 36%, 86% 32%, 94% 36%, 100% 34%, 100% 66%, 93% 68%, 85% 64%, 78% 68%, 70% 64%, 61% 67%, 65% 63%, 60% 57%, 65% 50%, 59% 43%)">
-      <div class="shard-inner">NG</div>
-    </div>
-    <!-- Shard 7: unten-links -->
-    <div class="shard" data-tx="-180" data-ty="155" data-rot="-20"
-         style="clip-path:polygon(0% 66%, 8% 63%, 16% 67%, 23% 64%, 31% 68%, 37% 67%, 42% 74%, 36% 80%, 43% 87%, 38% 94%, 41% 100%, 0% 100%)">
-      <div class="shard-inner">NG</div>
-    </div>
-    <!-- Shard 8: unten-mitte -->
-    <div class="shard" data-tx="0" data-ty="195" data-rot="5"
-         style="clip-path:polygon(37% 67%, 45% 65%, 53% 68%, 61% 67%, 65% 75%, 59% 82%, 65% 88%, 61% 95%, 63% 100%, 41% 100%, 38% 94%, 43% 87%, 36% 80%, 42% 74%)">
-      <div class="shard-inner">NG</div>
-    </div>
-    <!-- Shard 9: unten-rechts -->
-    <div class="shard" data-tx="185" data-ty="150" data-rot="28"
-         style="clip-path:polygon(61% 67%, 70% 64%, 78% 68%, 85% 64%, 93% 68%, 100% 66%, 100% 100%, 63% 100%, 61% 95%, 65% 88%, 59% 82%, 65% 75%)">
-      <div class="shard-inner">NG</div>
-    </div>
-  </div>
+  <!-- NG Logo Glasscherben-Effekt – Scherben werden per JS generiert -->
+  <div id="logo-shatter" aria-hidden="true"></div>
 
   <div class="container" style="display:flex;align-items:center;position:relative;z-index:3;">
     <div class="hero-content">
@@ -1198,10 +1361,10 @@ input, textarea, select { font-family: inherit; }
           <line x1="4"  y1="41" x2="13" y2="41" stroke="#38bdf8" stroke-width="1.5" stroke-linecap="round"/>
           <line x1="4"  y1="50" x2="13" y2="50" stroke="#38bdf8" stroke-width="1.5" stroke-linecap="round"/>
           <!-- Pins rechts -->
-          <line x1="59" y1="22" x2="68" y2="22" stroke="#38bdf8" stroke-width="1.5" stroke-linecap="round"/>
-          <line x1="59" y1="31" x2="68" y2="31" stroke="#38bdf8" stroke-width="1.5" stroke-linecap="round"/>
-          <line x1="59" y1="41" x2="68" y2="41" stroke="#38bdf8" stroke-width="1.5" stroke-linecap="round"/>
-          <line x1="59" y1="50" x2="68" y2="50" stroke="#38bdf8" stroke-width="1.5" stroke-linecap="round"/>
+          <line class="cpu-pin-r" x1="59" y1="22" x2="68" y2="22" stroke="#38bdf8" stroke-width="1.5" stroke-linecap="round"/>
+          <line class="cpu-pin-r" x1="59" y1="31" x2="68" y2="31" stroke="#38bdf8" stroke-width="1.5" stroke-linecap="round"/>
+          <line class="cpu-pin-r" x1="59" y1="41" x2="68" y2="41" stroke="#38bdf8" stroke-width="1.5" stroke-linecap="round"/>
+          <line class="cpu-pin-r" x1="59" y1="50" x2="68" y2="50" stroke="#38bdf8" stroke-width="1.5" stroke-linecap="round"/>
           <!-- Pins oben -->
           <line x1="22" y1="4"  x2="22" y2="13" stroke="#38bdf8" stroke-width="1.5" stroke-linecap="round"/>
           <line x1="31" y1="4"  x2="31" y2="13" stroke="#38bdf8" stroke-width="1.5" stroke-linecap="round"/>
@@ -1236,44 +1399,62 @@ input, textarea, select { font-family: inherit; }
         <span class="pv-label">Ihr Projekt</span>
       </div>
 
-      <!-- Draht CPU → Schritte -->
-      <div class="pv-wire"><div class="pv-wire-fill" id="pv-wire-left"></div></div>
+      <!-- Verbindungen: Draht links + Schritte + Draht rechts (ein Wrapper für den einheitlichen Beam) -->
+      <div class="pv-connectors">
 
-      <!-- Prozessschritte -->
-      <div class="process-track" id="process-track">
-        <div class="process-line" aria-hidden="true"><div class="process-line-fill" id="process-line-fill"></div></div>
-        <div class="process-step" data-step="1">
-          <div class="process-num">01</div>
-          <div>
-            <h3>Gespraech</h3>
-            <p>Wir lernen Ihr Projekt kennen und definieren gemeinsam die Ziele.</p>
+        <div class="pv-wire"><div class="pv-wire-fill" id="pv-wire-left"></div></div>
+
+        <!-- Prozessschritte -->
+        <div class="process-track" id="process-track">
+          <div class="process-line" aria-hidden="true"><div class="process-line-fill" id="process-line-fill"></div></div>
+          <div class="process-step" data-step="1">
+            <div class="process-num">01</div>
+            <div>
+              <h3>Gespraech</h3>
+              <p>Wir lernen Ihr Projekt kennen und definieren gemeinsam die Ziele.</p>
+            </div>
+          </div>
+          <div class="process-step" data-step="2">
+            <div class="process-num">02</div>
+            <div>
+              <h3>Konzept</h3>
+              <p>Struktur, Design und Inhalte werden geplant und abgestimmt.</p>
+            </div>
+          </div>
+          <div class="process-step" data-step="3">
+            <div class="process-num">03</div>
+            <div>
+              <h3>Entwicklung</h3>
+              <p>Ihr Webauftritt wird pixel-perfekt umgesetzt und getestet.</p>
+            </div>
+          </div>
+          <div class="process-step" data-step="4">
+            <div class="process-num">04</div>
+            <div>
+              <h3>Launch</h3>
+              <p>Ihre Website geht live — mit Support und Optimierung danach.</p>
+            </div>
           </div>
         </div>
-        <div class="process-step" data-step="2">
-          <div class="process-num">02</div>
-          <div>
-            <h3>Konzept</h3>
-            <p>Struktur, Design und Inhalte werden geplant und abgestimmt.</p>
-          </div>
-        </div>
-        <div class="process-step" data-step="3">
-          <div class="process-num">03</div>
-          <div>
-            <h3>Entwicklung</h3>
-            <p>Ihr Webauftritt wird pixel-perfekt umgesetzt und getestet.</p>
-          </div>
-        </div>
-        <div class="process-step" data-step="4">
-          <div class="process-num">04</div>
-          <div>
-            <h3>Launch</h3>
-            <p>Ihre Website geht live — mit Support und Optimierung danach.</p>
-          </div>
-        </div>
+
+        <div class="pv-wire"><div class="pv-wire-fill" id="pv-wire-right"></div></div>
+
+        <!-- SVG-Beam: folgt dem Pfad um die Kreise herum -->
+        <svg id="pv-beam-svg" class="pv-beam-svg" aria-hidden="true">
+          <defs>
+            <filter id="beam-glow-filter" x="-60%" y="-400%" width="220%" height="900%">
+              <feGaussianBlur in="SourceGraphic" stdDeviation="2.5"/>
+            </filter>
+          </defs>
+          <!-- Glow-Schicht (weich, blau) -->
+          <path id="pv-beam-glow" fill="none" stroke="#93c5fd" stroke-width="5"
+                stroke-linecap="round" filter="url(#beam-glow-filter)" style="opacity:.55;"/>
+          <!-- Kern-Schicht (hell, scharf) -->
+          <path id="pv-beam-core" fill="none" stroke="#e0f9ff" stroke-width="1.5"
+                stroke-linecap="round"/>
+        </svg>
+
       </div>
-
-      <!-- Draht Schritte → Website -->
-      <div class="pv-wire"><div class="pv-wire-fill" id="pv-wire-right"></div></div>
 
       <!-- ===== Browser / Website-Icon ===== -->
       <div class="pv-icon pv-web" style="margin-top:3px;">
@@ -1294,6 +1475,8 @@ input, textarea, select { font-family: inherit; }
           <rect x="39.5" y="9.5" width="4" height="3" rx=".5" fill="#38bdf8" opacity=".7"/>
           <!-- Domain-Text -->
           <text x="64" y="11" text-anchor="middle" dominant-baseline="middle" font-family="monospace" font-size="4.5" fill="#94a3b8">ngbuild.de</text>
+          <!-- Lade-Balken (Refresh-Indikator) -->
+          <rect class="web-load-bar" x="1" y="18" width="86" height="2" rx="0" fill="#38bdf8" opacity=".95"/>
           <!-- ─── Hero-Bereich ─── -->
           <rect x="5" y="22" width="78" height="16" rx="2" fill="#0e1f3d"/>
           <!-- Nav-Punkte im Hero -->
@@ -1331,53 +1514,128 @@ input, textarea, select { font-family: inherit; }
 </section>
 
 <!-- ===== PORTFOLIO ===== -->
-<section id="portfolio" class="section-pad">
+<section id="portfolio" class="section-pad" style="overflow:visible;">
   <div class="container">
     <div class="reveal">
       <h2 class="section-title">Portfolio</h2>
       <p class="section-sub">Ausgewaehlte Projekte, die unsere Arbeit zeigen.</p>
     </div>
+
+    <!-- Desktop: Folder-Effekt -->
+    <div class="pf-wrap">
+      <div class="pf-folder" id="pf-folder" role="button" tabindex="0" aria-expanded="false" aria-label="Portfolio öffnen">
+
+        <!-- Folder-Tab -->
+        <div class="pf-tab" aria-hidden="true">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+          3 Projekte
+        </div>
+
+        <!-- Folder-Körper -->
+        <div class="pf-body">
+
+          <!-- Hint (geschlossen) -->
+          <div class="pf-hint">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+            Klicken zum Öffnen
+          </div>
+
+          <!-- Karte 1: Unternehmenswebsite -->
+          <div class="pf-card pf-card-1">
+            <div class="pf-card-mock">
+              <div class="pf-mock-bar"><span class="pf-mock-dot"></span><span class="pf-mock-dot"></span><span class="pf-mock-dot"></span></div>
+              <div class="pf-mock-lines">
+                <div class="pf-mock-line" style="width:70%"></div>
+                <div class="pf-mock-line" style="width:50%"></div>
+                <div class="pf-mock-line" style="width:85%"></div>
+                <div class="pf-mock-line" style="width:40%"></div>
+              </div>
+            </div>
+            <div class="pf-card-info">
+              <span class="pf-card-tag">Beispielprojekt</span>
+              <div class="pf-card-title">Unternehmenswebsite</div>
+            </div>
+            <div class="pf-card-overlay">
+              <h3>Unternehmenswebsite</h3>
+              <a href="#kontakt" class="btn-ghost">Details anfragen</a>
+            </div>
+          </div>
+
+          <!-- Karte 2: Landingpage -->
+          <div class="pf-card pf-card-2">
+            <div class="pf-card-mock">
+              <div class="pf-mock-bar"><span class="pf-mock-dot"></span><span class="pf-mock-dot"></span><span class="pf-mock-dot"></span></div>
+              <div class="pf-mock-lines">
+                <div class="pf-mock-line" style="width:60%"></div>
+                <div class="pf-mock-line" style="width:80%"></div>
+                <div class="pf-mock-line" style="width:45%"></div>
+                <div class="pf-mock-line" style="width:70%"></div>
+              </div>
+            </div>
+            <div class="pf-card-info">
+              <span class="pf-card-tag">Beispielprojekt</span>
+              <div class="pf-card-title">Landingpage</div>
+            </div>
+            <div class="pf-card-overlay">
+              <h3>Landingpage</h3>
+              <a href="#kontakt" class="btn-ghost">Details anfragen</a>
+            </div>
+          </div>
+
+          <!-- Karte 3: Web-Applikation -->
+          <div class="pf-card pf-card-3">
+            <div class="pf-card-mock">
+              <div class="pf-mock-bar"><span class="pf-mock-dot"></span><span class="pf-mock-dot"></span><span class="pf-mock-dot"></span></div>
+              <div class="pf-mock-lines">
+                <div class="pf-mock-line" style="width:90%"></div>
+                <div class="pf-mock-line" style="width:35%"></div>
+                <div class="pf-mock-line" style="width:75%"></div>
+                <div class="pf-mock-line" style="width:50%"></div>
+              </div>
+            </div>
+            <div class="pf-card-info">
+              <span class="pf-card-tag">Beispielprojekt</span>
+              <div class="pf-card-title">Web-Applikation</div>
+            </div>
+            <div class="pf-card-overlay">
+              <h3>Web-Applikation</h3>
+              <a href="#kontakt" class="btn-ghost">Details anfragen</a>
+            </div>
+          </div>
+
+          <!-- Folder-Deckblatt -->
+          <div class="pf-front" aria-hidden="true"></div>
+        </div>
+
+        <span class="pf-close-hint" aria-hidden="true">Erneut klicken zum Schließen &middot; Esc</span>
+      </div>
+    </div>
+
+    <!-- Mobile: normales Grid -->
     <div class="portfolio-grid">
       <div class="portfolio-card reveal" tabindex="0">
         <div class="portfolio-mockup">
           <div class="mockup-bar"><span class="mockup-dot"></span><span class="mockup-dot"></span><span class="mockup-dot"></span></div>
-          <div class="mockup-lines">
-            <div class="mockup-line"></div><div class="mockup-line"></div><div class="mockup-line"></div><div class="mockup-line"></div><div class="mockup-line"></div>
-          </div>
+          <div class="mockup-lines"><div class="mockup-line"></div><div class="mockup-line"></div><div class="mockup-line"></div><div class="mockup-line"></div><div class="mockup-line"></div></div>
         </div>
-        <div class="portfolio-overlay">
-          <span>Beispielprojekt</span>
-          <h3>Unternehmenswebsite</h3>
-          <a href="#kontakt" class="btn-ghost">Details anfragen</a>
-        </div>
+        <div class="portfolio-overlay"><span>Beispielprojekt</span><h3>Unternehmenswebsite</h3><a href="#kontakt" class="btn-ghost">Details anfragen</a></div>
       </div>
       <div class="portfolio-card reveal" tabindex="0">
         <div class="portfolio-mockup">
           <div class="mockup-bar"><span class="mockup-dot"></span><span class="mockup-dot"></span><span class="mockup-dot"></span></div>
-          <div class="mockup-lines">
-            <div class="mockup-line" style="width:60%"></div><div class="mockup-line" style="width:80%"></div><div class="mockup-line" style="width:45%"></div><div class="mockup-line" style="width:70%"></div><div class="mockup-line" style="width:55%"></div>
-          </div>
+          <div class="mockup-lines"><div class="mockup-line" style="width:60%"></div><div class="mockup-line" style="width:80%"></div><div class="mockup-line" style="width:45%"></div><div class="mockup-line" style="width:70%"></div><div class="mockup-line" style="width:55%"></div></div>
         </div>
-        <div class="portfolio-overlay">
-          <span>Beispielprojekt</span>
-          <h3>Landingpage</h3>
-          <a href="#kontakt" class="btn-ghost">Details anfragen</a>
-        </div>
+        <div class="portfolio-overlay"><span>Beispielprojekt</span><h3>Landingpage</h3><a href="#kontakt" class="btn-ghost">Details anfragen</a></div>
       </div>
       <div class="portfolio-card reveal" tabindex="0">
         <div class="portfolio-mockup">
           <div class="mockup-bar"><span class="mockup-dot"></span><span class="mockup-dot"></span><span class="mockup-dot"></span></div>
-          <div class="mockup-lines">
-            <div class="mockup-line" style="width:90%"></div><div class="mockup-line" style="width:35%"></div><div class="mockup-line" style="width:75%"></div><div class="mockup-line" style="width:50%"></div><div class="mockup-line" style="width:60%"></div>
-          </div>
+          <div class="mockup-lines"><div class="mockup-line" style="width:90%"></div><div class="mockup-line" style="width:35%"></div><div class="mockup-line" style="width:75%"></div><div class="mockup-line" style="width:50%"></div><div class="mockup-line" style="width:60%"></div></div>
         </div>
-        <div class="portfolio-overlay">
-          <span>Beispielprojekt</span>
-          <h3>Web-Applikation</h3>
-          <a href="#kontakt" class="btn-ghost">Details anfragen</a>
-        </div>
+        <div class="portfolio-overlay"><span>Beispielprojekt</span><h3>Web-Applikation</h3><a href="#kontakt" class="btn-ghost">Details anfragen</a></div>
       </div>
     </div>
+
   </div>
 </section>
 
@@ -1698,27 +1956,77 @@ input, textarea, select { font-family: inherit; }
 
   /* ===== SCROLL SHATTER / REASSEMBLE ===== */
   var heroSection = document.getElementById('hero');
-  var shards = document.querySelectorAll('.shard');
 
+  /* --- Glasscherben generieren (6x4 Grid mit Jitter) --- */
+  (function () {
+    var container = document.getElementById('logo-shatter');
+    if (!container) return;
+    var rnd = Math.random;
+    var COLS = 6, ROWS = 4, JITTER = 11;
+
+    /* Gitterpunkte mit Zufalls-Jitter für unregelmäßige Polygone */
+    var G = [];
+    for (var r = 0; r <= ROWS; r++) {
+      G[r] = [];
+      for (var c = 0; c <= COLS; c++) {
+        G[r][c] = {
+          x: (c / COLS) * 100 + (c > 0 && c < COLS ? (rnd() * 2 - 1) * JITTER : 0),
+          y: (r / ROWS) * 100 + (r > 0 && r < ROWS ? (rnd() * 2 - 1) * JITTER : 0)
+        };
+      }
+    }
+
+    for (var row = 0; row < ROWS; row++) {
+      for (var col = 0; col < COLS; col++) {
+        var corners = [G[row][col], G[row][col + 1], G[row + 1][col + 1], G[row + 1][col]];
+        var poly = corners.map(function (p) {
+          return p.x.toFixed(1) + '% ' + p.y.toFixed(1) + '%';
+        }).join(', ');
+
+        /* Streurichtung: gleichmäßig über den gesamten Bildschirm */
+        var angle = rnd() * Math.PI * 2;
+        var dist  = 380 + rnd() * 820;
+        var fs    = 0.32 + rnd() * 0.38; /* Fade-Start: zwischen 32 % und 70 % */
+        var fe    = Math.min(fs + 0.14 + rnd() * 0.22, 1.0);
+
+        var el = document.createElement('div');
+        el.className = 'shard';
+        el.style.clipPath = 'polygon(' + poly + ')';
+        el.dataset.tx  = (Math.cos(angle) * dist).toFixed(1);
+        el.dataset.ty  = (Math.sin(angle) * dist).toFixed(1);
+        el.dataset.rot = ((rnd() * 2 - 1) * 55).toFixed(1);
+        el.dataset.fs  = fs.toFixed(3);
+        el.dataset.fe  = fe.toFixed(3);
+
+        var inner = document.createElement('div');
+        inner.className = 'shard-inner';
+        inner.textContent = 'NG';
+        el.appendChild(inner);
+        container.appendChild(el);
+      }
+    }
+  })();
+
+  var shards = document.querySelectorAll('.shard');
 
   function updateShatter() {
     if (!heroSection || !shards.length) return;
     var heroH = heroSection.offsetHeight;
-    var scrollY = window.pageYOffset;
-    var raw = Math.min(Math.max(scrollY / (heroH * 0.85), 0), 1);
+    var raw   = Math.min(Math.max(window.pageYOffset / (heroH * 0.85), 0), 1);
     /* Ease-in-out cubic */
     var t = raw < 0.5 ? 4 * raw * raw * raw : 1 - Math.pow(-2 * raw + 2, 3) / 2;
 
-    shards.forEach(function(shard) {
-      var tx = parseFloat(shard.getAttribute('data-tx')) || 0;
-      var ty = parseFloat(shard.getAttribute('data-ty')) || 0;
-      var rot = parseFloat(shard.getAttribute('data-rot')) || 0;
-      /* Fade beginnt bei 55% des Effekts */
-      var opacity = t < 0.55 ? 1 : 1 - ((t - 0.55) / 0.45);
-      shard.style.transform = 'translate(' + (tx * t) + 'px, ' + (ty * t) + 'px) rotate(' + (rot * t) + 'deg)';
-      shard.style.opacity = Math.max(opacity, 0);
+    shards.forEach(function (s) {
+      var tx  = parseFloat(s.dataset.tx)  || 0;
+      var ty  = parseFloat(s.dataset.ty)  || 0;
+      var rot = parseFloat(s.dataset.rot) || 0;
+      var fs  = parseFloat(s.dataset.fs)  || 0.55;
+      var fe  = parseFloat(s.dataset.fe)  || 1.0;
+      /* Jede Scherbe löst sich zu einem individuellen Zeitpunkt auf */
+      var op = t <= fs ? 1 : t >= fe ? 0 : 1 - (t - fs) / (fe - fs);
+      s.style.transform = 'translate(' + (tx * t) + 'px,' + (ty * t) + 'px) rotate(' + (rot * t) + 'deg)';
+      s.style.opacity   = Math.max(op, 0);
     });
-
   }
 
   window.addEventListener('scroll', updateShatter, { passive: true });
@@ -1833,6 +2141,67 @@ input, textarea, select { font-family: inherit; }
     processObserver.observe(processTrack);
   }
 
+  /* ===== SVG-BEAM: folgt dem Pfad um die Kreise herum ===== */
+  (function() {
+    var connectors = document.querySelector('.pv-connectors');
+    var track      = document.getElementById('process-track');
+    var beamSvg    = document.getElementById('pv-beam-svg');
+    var beamCore   = document.getElementById('pv-beam-core');
+    var beamGlow   = document.getElementById('pv-beam-glow');
+    if (!connectors || !track || !beamSvg || !beamCore || !beamGlow) return;
+    if (!('animate' in Element.prototype)) return;
+
+    var WIRE_W   = 28;   /* Breite jedes pv-wire */
+    var R        = 36;   /* Radius der Prozess-Num-Kreise */
+    var LINE_Y   = 36;   /* Y-Position des Pfades (Kreismitte) */
+    var SPOT     = 100;  /* Länge des Lichtpunkts in Pfad-Pixeln */
+    var DURATION = 5000; /* ms pro Zyklus */
+    var beamAnims = [];
+
+    function buildPath() {
+      beamAnims.forEach(function(a) { try { a.cancel(); } catch(e) {} });
+      beamAnims = [];
+
+      var totalW = connectors.offsetWidth;
+      var trackW = track.offsetWidth;
+      var stepW  = trackW / 4;
+
+      /* Mittelpunkte der 4 Kreise innerhalb von .pv-connectors */
+      var centers = [0, 1, 2, 3].map(function(i) {
+        return WIRE_W + stepW * i + stepW / 2;
+      });
+
+      /* Pfad: horizontal → Halbkreis oben um jeden Kreis → weiter */
+      var parts = ['M 0 ' + LINE_Y];
+      centers.forEach(function(cx) {
+        parts.push('L ' + (cx - R) + ' ' + LINE_Y);
+        /* sweep-flag 0 = gegen den Uhrzeigersinn = oben herum */
+        parts.push('A ' + R + ' ' + R + ' 0 0 0 ' + (cx + R) + ' ' + LINE_Y);
+      });
+      parts.push('L ' + totalW + ' ' + LINE_Y);
+
+      var d = parts.join(' ');
+      beamSvg.setAttribute('width', totalW);
+      beamCore.setAttribute('d', d);
+      beamGlow.setAttribute('d', d);
+
+      var pathLen   = beamCore.getTotalLength();
+      var dashArray = SPOT + ', ' + (pathLen + SPOT + 1);
+
+      [beamCore, beamGlow].forEach(function(el) {
+        el.style.strokeDasharray = dashArray;
+        var anim = el.animate(
+          [{ strokeDashoffset: SPOT }, { strokeDashoffset: -pathLen }],
+          { duration: DURATION, iterations: Infinity, easing: 'linear' }
+        );
+        beamAnims.push(anim);
+      });
+    }
+
+    buildPath();
+    window.addEventListener('resize', buildPath);
+  })();
+
   /* ===== COUNTER ANIMATION ===== */
   var statNums = document.querySelectorAll('.stat-num');
 
@@ -1866,6 +2235,49 @@ input, textarea, select { font-family: inherit; }
     }, { threshold: 0.5 });
 
     statNums.forEach(function(el) { counterObserver.observe(el); });
+  }
+
+  /* ===== FOLDER PORTFOLIO ===== */
+  var pfFolder = document.getElementById('pf-folder');
+  if (pfFolder) {
+    var pfCards = pfFolder.querySelectorAll('.pf-card');
+
+    function toggleFolder() {
+      var isOpen = pfFolder.classList.toggle('open');
+      pfFolder.setAttribute('aria-expanded', String(isOpen));
+      pfFolder.setAttribute('aria-label', isOpen ? 'Portfolio schließen' : 'Portfolio öffnen');
+    }
+
+    /* Klick auf Folder toggled – Klick auf Karte oder Link nicht */
+    pfFolder.addEventListener('click', function(e) {
+      if (e.target.closest('.pf-card')) return;
+      toggleFolder();
+    });
+
+    /* Tastatur */
+    pfFolder.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleFolder(); }
+      if (e.key === 'Escape' && pfFolder.classList.contains('open')) toggleFolder();
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && pfFolder.classList.contains('open')) toggleFolder();
+    });
+
+    /* Magnetischer Hover-Effekt auf offenen Karten */
+    pfCards.forEach(function(card) {
+      card.addEventListener('mousemove', function(e) {
+        if (!pfFolder.classList.contains('open')) return;
+        var rect = card.getBoundingClientRect();
+        var ox = ((e.clientX - rect.left) / rect.width  - 0.5) * 14;
+        var oy = ((e.clientY - rect.top)  / rect.height - 0.5) * 14;
+        card.style.setProperty('--mx', ox + 'px');
+        card.style.setProperty('--my', oy + 'px');
+      });
+      card.addEventListener('mouseleave', function() {
+        card.style.setProperty('--mx', '0px');
+        card.style.setProperty('--my', '0px');
+      });
+    });
   }
 
   /* ===== CONTACT FORM ===== */
