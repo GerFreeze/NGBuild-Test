@@ -111,6 +111,21 @@ input, textarea, select { font-family: inherit; }
   opacity: 1;
   transform: translateY(0);
 }
+@media (max-width: 900px) {
+  .reveal {
+    transform: translateY(20px);
+    transition: opacity .5s ease, transform .5s ease;
+  }
+  .portfolio-card.reveal {
+    transform: translateY(16px) scale(0.97);
+    transition: opacity .5s ease, transform .5s cubic-bezier(.25,.46,.45,.94);
+  }
+  .portfolio-card.reveal.visible {
+    transform: translateY(0) scale(1);
+  }
+  .portfolio-card.reveal:nth-child(2) { transition-delay: .1s; }
+  .portfolio-card.reveal:nth-child(3) { transition-delay: .2s; }
+}
 
 
 /* ===== NAVBAR ===== */
@@ -267,6 +282,17 @@ input, textarea, select { font-family: inherit; }
 @media (max-width: 768px) {
   .nav-links { display: none; }
   #hamburger { display: flex; }
+  .section-pad { padding: 72px 0; }
+  .section-sub { margin-bottom: 40px; }
+  .container { padding: 0 16px; }
+}
+@media (max-width: 480px) {
+  .section-pad { padding: 56px 0; }
+  .hero-headline { font-size: clamp(2rem, 8vw, 3rem); }
+  .hero-sub { font-size: 0.95rem; margin-bottom: 28px; }
+  .hero-ctas { flex-direction: column; gap: 12px; }
+  .hero-ctas .btn-primary,
+  .hero-ctas .btn-ghost { width: 100%; justify-content: center; text-align: center; }
 }
 
 /* ===== HERO (Cyber-Tech / Referenz-Motiv) ===== */
@@ -388,6 +414,11 @@ input, textarea, select { font-family: inherit; }
   backface-visibility: hidden;
 }
 /* Nur Kontur + Glow; Innen bleibt frei fuer maskierte Risse */
+@media (max-width: 768px) {
+  #logo-shatter { display: none; }
+  .hero-binary span { font-size: 9px; opacity: 0.6; }
+  .hero-binary .blur { display: none; }
+}
 .shard-inner {
   font-size: clamp(120px, 26vw, 380px);
   font-weight: 800;
@@ -414,7 +445,16 @@ input, textarea, select { font-family: inherit; }
   grid-template-columns: repeat(2, 1fr);
   gap: 24px;
 }
-@media (max-width: 768px) { .services-grid { grid-template-columns: 1fr; } }
+@media (max-width: 768px) {
+  .services-grid { grid-template-columns: 1fr; gap: 16px; }
+  .service-card { padding: 28px 20px; }
+  .service-icon { width: 40px; height: 40px; margin-bottom: 14px; }
+}
+@media (max-width: 480px) {
+  .service-card { padding: 24px 18px; }
+  .service-card h3 { font-size: 1.1rem; }
+  .service-card p { font-size: .9rem; }
+}
 .service-card {
   position: relative;
   background: var(--surface);
@@ -425,34 +465,37 @@ input, textarea, select { font-family: inherit; }
   isolation: isolate;
   --edge-proximity: 0;
   --cursor-angle: 0deg;
-  --cone-spread: 55deg;
+  --cone-spread: 75deg;
 }
 .service-card:hover {
   border-color: transparent;
   transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(56,189,248,.15), 0 0 48px rgba(37,99,235,.1);
 }
 .service-card .edge-light {
   position: absolute;
-  inset: -1px;
+  inset: -2px;
   border-radius: inherit;
   padding: 2px;
   background: conic-gradient(
     from calc(var(--cursor-angle) - var(--cone-spread)) at 50% 50%,
     transparent 0deg,
-    hsl(45deg 100% 55% / 80%) calc(var(--cone-spread) * 0.3),
-    hsl(50deg 100% 75% / 100%) calc(var(--cone-spread) * 0.7),
+    hsl(210deg 80% 55% / 70%) calc(var(--cone-spread) * 0.2),
+    hsl(200deg 95% 65% / 90%) calc(var(--cone-spread) * 0.5),
+    hsl(195deg 100% 75% / 100%) calc(var(--cone-spread) * 0.75),
     #ffffff calc(var(--cone-spread) * 0.95),
-    hsl(50deg 100% 75% / 100%) calc(var(--cone-spread) * 1.05),
-    hsl(45deg 100% 55% / 80%) calc(var(--cone-spread) * 1.4),
+    hsl(195deg 100% 75% / 100%) calc(var(--cone-spread) * 1.05),
+    hsl(200deg 95% 65% / 90%) calc(var(--cone-spread) * 1.25),
+    hsl(210deg 80% 55% / 70%) calc(var(--cone-spread) * 1.6),
     transparent calc(var(--cone-spread) * 2)
   );
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
-  opacity: calc(var(--edge-proximity) / 100);
+  opacity: calc(var(--edge-proximity) / 100 * 1.8);
   pointer-events: none;
   transition: opacity .15s;
-  filter: blur(0.4px) brightness(1.4);
+  filter: blur(0.6px) brightness(1.8);
 }
 .service-card:focus-within {
   border-color: var(--cyan);
@@ -629,20 +672,43 @@ input, textarea, select { font-family: inherit; }
   width: 0%;
   transition: width .5s ease;
 }
-@media (max-width: 900px) {
-  .pv-icon, .pv-wire, .pv-beam-svg { display: none; }
-}
 @media (max-width: 768px) {
-  .process-track { flex-direction: column; gap: 40px; }
-  .process-line {
-    top: 36px;
-    bottom: 36px;
-    left: 36px;
-    right: auto;
-    width: 2px;
-    height: auto;
+  /* Vertikales Layout: CPU oben → Schritte → Website unten */
+  .process-visual-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
   }
-  .process-line-fill { width: 100%; height: 0%; }
+  .pv-icon {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  .pv-cpu svg { width: 56px; height: 56px; }
+  .pv-web svg { width: 72px; height: 54px; }
+  .pv-label { max-width: 88px; font-size: .68rem; }
+  /* Drähte komplett ausblenden auf Mobile */
+  .pv-wire { display: none; }
+  /* Beam-SVG: vertikal, deckt CPU → Schritte → Website ab */
+  .pv-beam-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: visible;
+    pointer-events: none;
+  }
+  .pv-connectors {
+    width: 100%;
+    position: relative;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .process-track {
+    flex-direction: column;
+    gap: 40px;
+    width: 100%;
+  }
+  .process-line { display: none; }
   .process-step {
     display: flex;
     align-items: flex-start;
@@ -652,6 +718,12 @@ input, textarea, select { font-family: inherit; }
   }
   .process-num { margin: 0; flex-shrink: 0; }
 }
+@media (max-width: 480px) {
+  .pv-cpu svg { width: 48px; height: 48px; }
+  .pv-web svg { width: 60px; height: 45px; }
+  .process-num { width: 56px; height: 56px; font-size: 1rem; }
+  .process-step { gap: 14px; }
+}
 
 /* ===== PORTFOLIO ===== */
 .portfolio-grid {
@@ -659,7 +731,17 @@ input, textarea, select { font-family: inherit; }
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
 }
-@media (max-width: 900px) { .portfolio-grid { grid-template-columns: 1fr; } }
+@media (max-width: 900px) {
+  .portfolio-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+  .portfolio-card {
+    aspect-ratio: 16/10;
+  }
+}
 .portfolio-card {
   position: relative;
   background: var(--surface);
@@ -736,8 +818,7 @@ input, textarea, select { font-family: inherit; }
 }
 
 /* ===== FOLDER PORTFOLIO ===== */
-@media (min-width: 901px) { .portfolio-grid { display: none; } }
-@media (max-width: 900px)  { .pf-wrap      { display: none; } }
+.portfolio-grid { display: none; }
 .pf-wrap {
   display: flex;
   justify-content: center;
@@ -746,7 +827,7 @@ input, textarea, select { font-family: inherit; }
 }
 .pf-folder {
   position: relative;
-  width: 300px;
+  width: 380px;
   cursor: pointer;
   user-select: none;
 }
@@ -754,8 +835,8 @@ input, textarea, select { font-family: inherit; }
   display: flex;
   align-items: center;
   gap: 6px;
-  width: 130px;
-  height: 26px;
+  width: 160px;
+  height: 30px;
   padding: 0 12px;
   margin-left: 12px;
   background: #142440;
@@ -770,8 +851,8 @@ input, textarea, select { font-family: inherit; }
 }
 .pf-body {
   position: relative;
-  width: 300px;
-  height: 200px;
+  width: 380px;
+  height: 240px;
   background: #0d1b35;
   border: 1px solid rgba(37,99,235,.3);
   border-radius: 0 8px 8px 8px;
@@ -813,37 +894,108 @@ input, textarea, select { font-family: inherit; }
 /* Portfolio cards inside folder */
 .pf-card {
   position: absolute;
-  width: 250px;
-  height: 182px;
+  width: 320px;
+  height: 215px;
   background: var(--surface);
   border: 1px solid rgba(255,255,255,.07);
   border-radius: var(--radius);
   overflow: hidden;
-  bottom: 10px;
+  top: -22px;
   left: 50%;
   transform: translateX(-50%);
   transition: transform .52s cubic-bezier(.34,1.3,.64,1), box-shadow .3s, border-color .3s;
   will-change: transform;
+  pointer-events: none;
 }
 .pf-card-1 { z-index: 3; transition-delay: .04s; }
 .pf-card-2 { z-index: 2; transition-delay: .08s; }
 .pf-card-3 { z-index: 1; transition-delay: .12s; }
 /* Open: fan out with magnetic variable */
+.pf-folder.open .pf-card {
+  pointer-events: auto;
+}
 .pf-folder.open .pf-card-1 {
-  transform: translateX(calc(-50% - 295px + var(--mx,0px))) translateY(calc(-85px + var(--my,0px))) rotate(-10deg);
+  transform: translateX(calc(-50% - 340px + var(--mx,0px))) translateY(calc(-90px + var(--my,0px))) rotate(-10deg);
   transition-delay: .04s;
 }
 .pf-folder.open .pf-card-2 {
-  transform: translateX(calc(-50% + var(--mx,0px))) translateY(calc(-195px + var(--my,0px)));
+  transform: translateX(calc(-50% + var(--mx,0px))) translateY(calc(-210px + var(--my,0px)));
   transition-delay: 0s;
 }
 .pf-folder.open .pf-card-3 {
-  transform: translateX(calc(-50% + 295px + var(--mx,0px))) translateY(calc(-85px + var(--my,0px))) rotate(10deg);
+  transform: translateX(calc(-50% + 340px + var(--mx,0px))) translateY(calc(-90px + var(--my,0px))) rotate(10deg);
   transition-delay: .08s;
 }
 .pf-folder.open .pf-card:hover {
   border-color: rgba(37,99,235,.5);
   box-shadow: 0 20px 60px rgba(0,0,0,.55), 0 0 0 1px rgba(37,99,235,.25);
+}
+/* Mobile folder: nach UNTEN ausklappen, Bereich erweitert sich */
+@media (max-width: 900px) {
+  .pf-wrap {
+    padding: 40px 0 40px;
+    overflow: visible;
+  }
+  .pf-folder {
+    width: 100%;
+    max-width: 320px;
+    /* Platzhalter unten, wächst wenn offen */
+    padding-bottom: 0;
+    transition: padding-bottom .5s cubic-bezier(.34,1.3,.64,1);
+  }
+  .pf-folder.open {
+    padding-bottom: 600px;
+  }
+  .pf-body {
+    width: 100%;
+    height: 200px;
+  }
+  .pf-card {
+    width: 88%;
+    height: 175px;
+    top: auto;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%) translateY(0);
+  }
+  /* Deckel klappt nach unten statt nach oben */
+  .pf-folder.open .pf-front {
+    transform: translateY(108%) scaleY(.45);
+    opacity: 0;
+  }
+  /* Karten gleiten nach unten heraus */
+  .pf-folder.open .pf-card-1 {
+    transform: translateX(-50%) translateY(calc(100% + 20px));
+    transition-delay: .04s;
+  }
+  .pf-folder.open .pf-card-2 {
+    transform: translateX(-50%) translateY(calc(200% + 40px));
+    transition-delay: .1s;
+  }
+  .pf-folder.open .pf-card-3 {
+    transform: translateX(-50%) translateY(calc(300% + 60px));
+    transition-delay: .16s;
+  }
+  .pf-close-hint {
+    bottom: auto;
+    top: calc(100% + 8px);
+    font-size: .75rem;
+    z-index: 20;
+    transition: opacity .3s;
+  }
+  .pf-folder.open .pf-close-hint {
+    top: auto;
+    bottom: -40px;
+    color: var(--text-muted);
+  }
+}
+@media (max-width: 480px) {
+  .pf-folder { max-width: 280px; }
+  .pf-body { height: 170px; }
+  .pf-card { height: 155px; }
+  .pf-folder.open {
+    padding-bottom: 530px;
+  }
 }
 /* Mini mockup inside card */
 .pf-card-mock {
@@ -933,52 +1085,103 @@ input, textarea, select { font-family: inherit; }
   align-items: center;
 }
 @media (max-width: 768px) { .about-grid { grid-template-columns: 1fr; gap: 40px; } }
+.about-text {
+  position: relative;
+}
+.about-text::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  left: 0;
+  width: 48px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--blue), var(--cyan));
+  border-radius: 2px;
+}
 .about-text p {
   color: var(--text-muted);
   font-size: 1rem;
-  line-height: 1.7;
-  margin-bottom: 16px;
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+.about-text p strong {
+  color: var(--blue-light);
+  font-weight: 600;
 }
 .about-profile {
   display: flex;
   align-items: center;
-  gap: 16px;
-  margin-top: 32px;
+  gap: 18px;
+  margin-top: 36px;
+  padding: 20px 24px;
+  background: rgba(37,99,235,.06);
+  border: 1px solid rgba(37,99,235,.15);
+  border-radius: var(--radius);
+  transition: border-color .3s, box-shadow .3s;
+}
+.about-profile:hover {
+  border-color: rgba(37,99,235,.3);
+  box-shadow: 0 4px 24px rgba(37,99,235,.08);
 }
 .about-avatar {
-  width: 56px;
-  height: 56px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   background: linear-gradient(135deg, var(--blue), var(--cyan));
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  box-shadow: 0 4px 16px rgba(37,99,235,.25);
 }
 .about-avatar svg { width: 28px; height: 28px; color: #fff; }
-.about-name { font-weight: 600; font-size: 1rem; }
-.about-role { font-size: .85rem; color: var(--text-muted); }
+.about-name { font-weight: 700; font-size: 1.05rem; }
+.about-role { font-size: .85rem; color: var(--text-muted); margin-top: 2px; }
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
+  grid-template-columns: 1fr;
+  gap: 20px;
 }
 .stat-card {
   background: var(--surface);
   border: 1px solid rgba(255,255,255,.06);
   border-radius: var(--radius);
-  padding: 32px 24px;
+  padding: 36px 28px;
   text-align: center;
+  position: relative;
+  overflow: hidden;
 }
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--blue), var(--cyan));
+  opacity: 0;
+  transition: opacity .3s;
+}
+.stat-card:hover::before { opacity: 1; }
 .stat-num {
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
   font-weight: 800;
-  color: var(--blue-light);
-  margin-bottom: 4px;
+  background: linear-gradient(135deg, var(--blue-light), var(--cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 6px;
 }
 .stat-label {
-  font-size: .85rem;
+  font-size: .88rem;
   color: var(--text-muted);
+  font-weight: 500;
+}
+@media (max-width: 768px) {
+  .about-text::before { top: -12px; width: 36px; }
+  .about-profile { padding: 16px 18px; gap: 14px; }
+  .about-avatar { width: 52px; height: 52px; }
+  .stat-card { padding: 28px 20px; }
 }
 
 /* ===== KONTAKT ===== */
@@ -988,7 +1191,17 @@ input, textarea, select { font-family: inherit; }
   gap: 64px;
   align-items: start;
 }
-@media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr; gap: 40px; } }
+@media (max-width: 768px) {
+  .contact-grid { grid-template-columns: 1fr; gap: 32px; }
+  .form-group input,
+  .form-group textarea,
+  .form-group select { padding: 12px 14px; font-size: .9rem; }
+  .contact-item-icon { width: 40px; height: 40px; border-radius: 8px; }
+}
+@media (max-width: 480px) {
+  .contact-grid { gap: 28px; }
+  .checkbox-group label { font-size: .8rem; }
+}
 .form-group {
   margin-bottom: 20px;
 }
@@ -1217,16 +1430,16 @@ input, textarea, select { font-family: inherit; }
         <div class="nav-dropdown-menu" id="dropdown-menu" role="menu">
           <a href="#leistungen" role="menuitem">Webdesign &amp; Entwicklung</a>
           <a href="#leistungen" role="menuitem">Landingpages</a>
-          <a href="#leistungen" role="menuitem">Individuelle Loesungen</a>
+          <a href="#leistungen" role="menuitem">Individuelle Lösungen</a>
           <a href="#leistungen" role="menuitem">SEO-Optimierung</a>
         </div>
       </div>
       <a href="#portfolio">Portfolio</a>
-      <a href="#ueber-uns">Ueber uns</a>
+      <a href="#ueber-uns">Über uns</a>
       <a href="#kontakt">Kontakt</a>
       <a href="#kontakt" class="btn-primary nav-cta">Projekt starten</a>
     </div>
-    <button id="hamburger" aria-label="Menue oeffnen" aria-expanded="false">
+    <button id="hamburger" aria-label="Menü öffnen" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
   </div>
@@ -1238,10 +1451,10 @@ input, textarea, select { font-family: inherit; }
   <a href="#leistungen">Leistungen</a>
   <a href="#leistungen" class="mobile-sub">Webdesign &amp; Entwicklung</a>
   <a href="#leistungen" class="mobile-sub">Landingpages</a>
-  <a href="#leistungen" class="mobile-sub">Individuelle Loesungen</a>
+  <a href="#leistungen" class="mobile-sub">Individuelle Lösungen</a>
   <a href="#leistungen" class="mobile-sub">SEO-Optimierung</a>
   <a href="#portfolio">Portfolio</a>
-  <a href="#ueber-uns">Ueber uns</a>
+  <a href="#ueber-uns">Über uns</a>
   <a href="#kontakt">Kontakt</a>
   <a href="#kontakt" class="btn-primary" style="text-align:center;margin-top:16px;">Projekt starten</a>
 </div>
@@ -1270,7 +1483,7 @@ input, textarea, select { font-family: inherit; }
   <div class="container" style="display:flex;align-items:center;position:relative;z-index:3;">
     <div class="hero-content">
       <h1 class="hero-headline" aria-label="Webseiten die begeistern."><span id="typewriter"></span><span class="cursor" aria-hidden="true"></span></h1>
-      <p class="hero-sub">Professionelles Webdesign fuer Ihr Unternehmen — modern, schnell und individuell.</p>
+      <p class="hero-sub">Professionelles Webdesign für Ihr Unternehmen — modern, schnell und individuell.</p>
       <div class="hero-ctas">
         <a href="#kontakt" class="btn-primary">Projekt starten
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -1302,7 +1515,7 @@ input, textarea, select { font-family: inherit; }
           </svg>
         </div>
         <h3>Webdesign &amp; Entwicklung</h3>
-        <p>Responsive Websites, die auf allen Geraeten perfekt aussehen — modern, performant und individuell gestaltet.</p>
+        <p>Responsive Websites, die auf allen Geräten perfekt aussehen — modern, performant und individuell gestaltet.</p>
       </div>
       <div class="service-card reveal" tabindex="0">
         <div class="service-icon" aria-hidden="true">
@@ -1323,8 +1536,8 @@ input, textarea, select { font-family: inherit; }
             <circle cx="24" cy="26" r="3"/>
           </svg>
         </div>
-        <h3>Individuelle Web-Loesungen</h3>
-        <p>Massgeschneiderte Webanwendungen, die exakt auf Ihre Geschaeftsprozesse zugeschnitten sind.</p>
+        <h3>Individuelle Web-Lösungen</h3>
+        <p>Maßgeschneiderte Webanwendungen, die exakt auf Ihre Geschäftsprozesse zugeschnitten sind.</p>
       </div>
       <div class="service-card reveal" tabindex="0">
         <div class="service-icon" aria-hidden="true">
@@ -1335,7 +1548,7 @@ input, textarea, select { font-family: inherit; }
           </svg>
         </div>
         <h3>SEO &amp; Performance</h3>
-        <p>Werden Sie gefunden. Wir optimieren Ihre Seite fuer Suchmaschinen und maximale Ladegeschwindigkeit.</p>
+        <p>Werden Sie gefunden. Wir optimieren Ihre Seite für Suchmaschinen und maximale Ladegeschwindigkeit.</p>
       </div>
     </div>
   </div>
@@ -1410,7 +1623,7 @@ input, textarea, select { font-family: inherit; }
           <div class="process-step" data-step="1">
             <div class="process-num">01</div>
             <div>
-              <h3>Gespraech</h3>
+              <h3>Gespräch</h3>
               <p>Wir lernen Ihr Projekt kennen und definieren gemeinsam die Ziele.</p>
             </div>
           </div>
@@ -1518,7 +1731,7 @@ input, textarea, select { font-family: inherit; }
   <div class="container">
     <div class="reveal">
       <h2 class="section-title">Portfolio</h2>
-      <p class="section-sub">Ausgewaehlte Projekte, die unsere Arbeit zeigen.</p>
+      <p class="section-sub">Ausgewählte Projekte, die unsere Arbeit zeigen.</p>
     </div>
 
     <!-- Desktop: Folder-Effekt -->
@@ -1644,35 +1857,23 @@ input, textarea, select { font-family: inherit; }
   <div class="container">
     <div class="about-grid">
       <div class="about-text reveal">
-        <h2 class="section-title">Ueber uns</h2>
-        <p>Hinter NGBuild steckt die Leidenschaft fuer modernes Webdesign und technische Exzellenz. Wir glauben daran, dass jede Website ein Erlebnis sein sollte — schnell, zugaenglich und visuell ueberzeugend.</p>
-        <p>Als Kleingewerbe bieten wir persoenliche Betreuung und massgeschneiderte Loesungen ohne Agentur-Overhead. Jedes Projekt erhaelt unsere volle Aufmerksamkeit.</p>
+        <h2 class="section-title">Über mich</h2>
+        <p>Hallo! Ich bin Niels Gimmler, der Kopf hinter ngbuild. Als Student der Wirtschaftsinformatik brenne ich für die Schnittstelle zwischen effizienten Prozessen und modernster Technik.</p>
+        <p>Für mich ist ngbuild mehr als nur ein Name – es ist ein Versprechen in zweierlei Hinsicht: <strong>Niels Gimmler Build</strong> — ich stehe persönlich mit meinem Namen für die Qualität und Sorgfalt jedes Projekts, das meine Werkstatt verlässt. <strong>Next Generation Build</strong> — ich nutze aktuelle technologische Standards und zukunftsorientierte Ansätze, um Lösungen zu schaffen, die nicht nur heute funktionieren, sondern auch morgen noch begeistern.</p>
         <div class="about-profile">
           <div class="about-avatar" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/></svg>
           </div>
           <div>
-            <div class="about-name">NGBuild</div>
-            <div class="about-role">Webdesign &amp; Entwicklung</div>
+            <div class="about-name">Niels Gimmler</div>
+            <div class="about-role">Student Wirtschaftsinformatik &amp; Gründer ngbuild</div>
           </div>
         </div>
       </div>
       <div class="stats-grid reveal">
         <div class="stat-card">
-          <div class="stat-num" data-target="15" data-suffix="+">0</div>
-          <div class="stat-label">Projekte</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num" data-target="100" data-suffix="%">0</div>
-          <div class="stat-label">Kundenzufriedenheit</div>
-        </div>
-        <div class="stat-card">
           <div class="stat-num" data-target="24" data-suffix="h">0</div>
           <div class="stat-label">Reaktionszeit</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num" data-target="3" data-suffix="+">0</div>
-          <div class="stat-label">Jahre Erfahrung</div>
         </div>
       </div>
     </div>
@@ -1684,7 +1885,7 @@ input, textarea, select { font-family: inherit; }
   <div class="container">
     <div class="reveal">
       <h2 class="section-title">Kontakt</h2>
-      <p class="section-sub">Bereit fuer Ihr Projekt? Schreiben Sie uns — wir melden uns innerhalb von 24 Stunden.</p>
+      <p class="section-sub">Bereit für Ihr Projekt? Schreiben Sie uns — wir melden uns innerhalb von 24 Stunden.</p>
     </div>
     <div class="contact-grid">
       <form id="contact-form" class="reveal" novalidate>
@@ -1696,7 +1897,7 @@ input, textarea, select { font-family: inherit; }
         <div class="form-group">
           <label for="cf-email">E-Mail *</label>
           <input type="email" id="cf-email" name="email" required autocomplete="email">
-          <div class="error-msg">Bitte geben Sie eine gueltige E-Mail-Adresse ein.</div>
+          <div class="error-msg">Bitte geben Sie eine gültige E-Mail-Adresse ein.</div>
         </div>
         <div class="form-group">
           <label for="cf-subject">Betreff</label>
@@ -1709,14 +1910,14 @@ input, textarea, select { font-family: inherit; }
         </div>
         <div class="checkbox-group">
           <input type="checkbox" id="cf-privacy" name="privacy" required>
-          <label for="cf-privacy">Ich habe die <a href="#datenschutz">Datenschutzerklaerung</a> gelesen und stimme der Verarbeitung meiner Daten zu. *</label>
+          <label for="cf-privacy">Ich habe die <a href="#datenschutz">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner Daten zu. *</label>
         </div>
-        <div id="privacy-error" class="error-msg" style="display:none;margin-bottom:16px;">Bitte stimmen Sie der Datenschutzerklaerung zu.</div>
+        <div id="privacy-error" class="error-msg" style="display:none;margin-bottom:16px;">Bitte stimmen Sie der Datenschutzerklärung zu.</div>
         <button type="submit" class="btn-primary">
           Nachricht senden
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
         </button>
-        <div id="form-success" role="alert">Vielen Dank! Ihre Nachricht wurde erfolgreich gesendet. Wir melden uns in Kuerze bei Ihnen.</div>
+        <div id="form-success" role="alert">Vielen Dank! Ihre Nachricht wurde erfolgreich gesendet. Wir melden uns in Kürze bei Ihnen.</div>
       </form>
       <div class="contact-info reveal">
         <div class="contact-item">
@@ -2075,7 +2276,7 @@ input, textarea, select { font-family: inherit; }
     mobileNav.classList.toggle('open');
     hamburger.classList.toggle('active');
     hamburger.setAttribute('aria-expanded', !isOpen);
-    hamburger.setAttribute('aria-label', isOpen ? 'Menue oeffnen' : 'Menue schliessen');
+    hamburger.setAttribute('aria-label', isOpen ? 'Menü öffnen' : 'Menü schließen');
     document.body.style.overflow = isOpen ? '' : 'hidden';
   });
 
@@ -2084,7 +2285,7 @@ input, textarea, select { font-family: inherit; }
       mobileNav.classList.remove('open');
       hamburger.classList.remove('active');
       hamburger.setAttribute('aria-expanded', 'false');
-      hamburger.setAttribute('aria-label', 'Menue oeffnen');
+      hamburger.setAttribute('aria-label', 'Menü öffnen');
       document.body.style.overflow = '';
     }
   });
@@ -2119,18 +2320,24 @@ input, textarea, select { font-family: inherit; }
       entries.forEach(function(entry) {
         if (entry.isIntersecting) {
           var isMobile = window.innerWidth <= 768;
-          if (!isMobile && pvWireLeft) pvWireLeft.style.width = '100%';
+          if (pvWireLeft) {
+            if (isMobile) { pvWireLeft.style.height = '100%'; }
+            else { pvWireLeft.style.width = '100%'; }
+          }
           processSteps.forEach(function(step, i) {
             setTimeout(function() {
               step.classList.add('active');
               var progress = ((i + 1) / processSteps.length) * 100;
               if (isMobile) {
-                processLineFill.style.height = progress + '%';
+                if (processLineFill) processLineFill.style.height = progress + '%';
               } else {
-                processLineFill.style.width = progress + '%';
+                if (processLineFill) processLineFill.style.width = progress + '%';
               }
-              if (i === processSteps.length - 1 && !isMobile && pvWireRight) {
-                setTimeout(function() { pvWireRight.style.width = '100%'; }, 250);
+              if (i === processSteps.length - 1 && pvWireRight) {
+                setTimeout(function() {
+                  if (isMobile) { pvWireRight.style.height = '100%'; }
+                  else { pvWireRight.style.width = '100%'; }
+                }, 250);
               }
             }, i * 300);
           });
@@ -2151,39 +2358,108 @@ input, textarea, select { font-family: inherit; }
     if (!connectors || !track || !beamSvg || !beamCore || !beamGlow) return;
     if (!('animate' in Element.prototype)) return;
 
-    var WIRE_W   = 28;   /* Breite jedes pv-wire */
-    var R        = 36;   /* Radius der Prozess-Num-Kreise */
-    var LINE_Y   = 36;   /* Y-Position des Pfades (Kreismitte) */
-    var SPOT     = 100;  /* Länge des Lichtpunkts in Pfad-Pixeln */
-    var DURATION = 5000; /* ms pro Zyklus */
+    var SPOT     = 100;
+    var DURATION = 5000;
     var beamAnims = [];
+
+    function isMobileLayout() {
+      return window.innerWidth <= 768;
+    }
 
     function buildPath() {
       beamAnims.forEach(function(a) { try { a.cancel(); } catch(e) {} });
       beamAnims = [];
 
-      var totalW = connectors.offsetWidth;
-      var trackW = track.offsetWidth;
-      var stepW  = trackW / 4;
+      var steps = track.querySelectorAll('.process-step');
+      if (!steps.length) return;
 
-      /* Mittelpunkte der 4 Kreise innerhalb von .pv-connectors */
-      var centers = [0, 1, 2, 3].map(function(i) {
-        return WIRE_W + stepW * i + stepW / 2;
-      });
+      if (isMobileLayout()) {
+        /* ===== VERTIKALER BEAM (Mobile) ===== */
+        /* SVG in process-visual-row verschieben, damit es CPU+Website abdeckt */
+        var row = document.querySelector('.process-visual-row');
+        if (beamSvg.parentNode !== row) {
+          row.style.position = 'relative';
+          row.appendChild(beamSvg);
+        }
+        var rowRect = row.getBoundingClientRect();
+        var totalH  = row.offsetHeight;
 
-      /* Pfad: horizontal → Halbkreis oben um jeden Kreis → weiter */
-      var parts = ['M 0 ' + LINE_Y];
-      centers.forEach(function(cx) {
-        parts.push('L ' + (cx - R) + ' ' + LINE_Y);
-        /* sweep-flag 0 = gegen den Uhrzeigersinn = oben herum */
-        parts.push('A ' + R + ' ' + R + ' 0 0 0 ' + (cx + R) + ' ' + LINE_Y);
-      });
-      parts.push('L ' + totalW + ' ' + LINE_Y);
+        /* CPU-Icon Mittelpunkt */
+        var cpuIcon = row.querySelector('.pv-cpu svg');
+        var cpuRect = cpuIcon.getBoundingClientRect();
+        var cpuCY = cpuRect.top - rowRect.top + cpuRect.height / 2;
+        var cpuCX = cpuRect.left - rowRect.left + cpuRect.width / 2;
 
-      var d = parts.join(' ');
-      beamSvg.setAttribute('width', totalW);
-      beamCore.setAttribute('d', d);
-      beamGlow.setAttribute('d', d);
+        /* Website-Icon Mittelpunkt */
+        var webIcon = row.querySelector('.pv-web svg');
+        var webRect = webIcon.getBoundingClientRect();
+        var webCY = webRect.top - rowRect.top + webRect.height / 2;
+
+        /* Kreismittelpunkte der Schritte */
+        var centersY = [];
+        var LINE_X = 36;
+        var R = 28;
+        for (var i = 0; i < steps.length; i++) {
+          var numEl = steps[i].querySelector('.process-num');
+          var numRect = numEl.getBoundingClientRect();
+          var cy = numRect.top - rowRect.top + numRect.height / 2;
+          var cx = numRect.left - rowRect.left + numRect.width / 2;
+          centersY.push(cy);
+          if (i === 0) {
+            LINE_X = cx;
+            R = numRect.width / 2;
+          }
+        }
+
+        /* Pfad: CPU-Mitte → gerade runter → Halbkreis um jeden Kreis → gerade → Website-Mitte */
+        var parts = ['M ' + LINE_X + ' ' + cpuCY];
+        centersY.forEach(function(cy) {
+          parts.push('L ' + LINE_X + ' ' + (cy - R));
+          parts.push('A ' + R + ' ' + R + ' 0 0 1 ' + LINE_X + ' ' + (cy + R));
+        });
+        parts.push('L ' + LINE_X + ' ' + webCY);
+
+        var svgW = Math.ceil(LINE_X + R + 10);
+        var d = parts.join(' ');
+        beamSvg.style.width = svgW + 'px';
+        beamSvg.style.height = totalH + 'px';
+        beamSvg.setAttribute('width', svgW);
+        beamSvg.setAttribute('height', totalH);
+        beamSvg.setAttribute('viewBox', '0 0 ' + svgW + ' ' + totalH);
+        beamCore.setAttribute('d', d);
+        beamGlow.setAttribute('d', d);
+      } else {
+        /* ===== HORIZONTALER BEAM (Desktop) ===== */
+        /* SVG zurück in connectors, falls es vorher in row war */
+        if (beamSvg.parentNode !== connectors) {
+          connectors.appendChild(beamSvg);
+        }
+        var WIRE_W = 28;
+        var R = 36;
+        var LINE_Y = 36;
+        var totalW = connectors.offsetWidth;
+        var trackW = track.offsetWidth;
+        var stepW  = trackW / 4;
+
+        var centers = [0, 1, 2, 3].map(function(idx) {
+          return WIRE_W + stepW * idx + stepW / 2;
+        });
+
+        var parts = ['M 0 ' + LINE_Y];
+        centers.forEach(function(cx) {
+          parts.push('L ' + (cx - R) + ' ' + LINE_Y);
+          parts.push('A ' + R + ' ' + R + ' 0 0 0 ' + (cx + R) + ' ' + LINE_Y);
+        });
+        parts.push('L ' + totalW + ' ' + LINE_Y);
+
+        var d = parts.join(' ');
+        beamSvg.removeAttribute('viewBox');
+        beamSvg.style.width = '';
+        beamSvg.style.height = '';
+        beamSvg.setAttribute('width', totalW);
+        beamCore.setAttribute('d', d);
+        beamGlow.setAttribute('d', d);
+      }
 
       var pathLen   = beamCore.getTotalLength();
       var dashArray = SPOT + ', ' + (pathLen + SPOT + 1);
