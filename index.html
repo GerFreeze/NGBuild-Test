@@ -2,12 +2,95 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
+<script>if(localStorage.getItem('ngbuild-theme')==='light')document.documentElement.classList.add('light-mode');</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
-<title>NGBuild — Professionelles Webdesign</title>
-<meta name="description" content="NGBuild — Professionelles Webdesign für Ihr Unternehmen. Modern, schnell und individuell.">
+<!-- Fonts lokal gehostet (DSGVO-konform, keine externe Anfrage) -->
+<style>
+/* latin-ext: erweitertes Latein (Sonderzeichen europäischer Sprachen) */
+@font-face {
+  font-family: 'Montserrat';
+  src: url('fonts/montserrat-latin-ext.woff2') format('woff2');
+  font-weight: 700 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin: Standard-Latein inkl. ä, ö, ü */
+@font-face {
+  font-family: 'Montserrat';
+  src: url('fonts/montserrat-latin.woff2') format('woff2');
+  font-weight: 700 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+</style>
+<title>NGBuild — Professionelle Webseiten ab 499 € | Niels Gimmler</title>
+<meta name="description" content="Professionelle Webseiten für Unternehmen — modern, schnell & DSGVO-konform. Fertig in 7–14 Tagen. Jetzt kostenlos beraten lassen.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://ngbuild.de/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ngbuild.de/">
+<meta property="og:title" content="NGBuild — Professionelle Webseiten für Ihr Unternehmen">
+<meta property="og:description" content="Professionelle Webseiten ab 499 € — modern, schnell & DSGVO-konform. Fertig in 7–14 Tagen.">
+<meta property="og:locale" content="de_DE">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="NGBuild — Professionelle Webseiten">
+<meta name="twitter:description" content="Professionelle Webseiten ab 499 € — modern, schnell & DSGVO-konform.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "NGBuild",
+  "description": "Professionelle Webseiten für Unternehmen — modern, schnell und DSGVO-konform.",
+  "url": "https://ngbuild.de",
+  "email": "kontakt@ngbuild.de",
+  "areaServed": "DE",
+  "founder": {
+    "@type": "Person",
+    "name": "Niels Gimmler"
+  },
+  "priceRange": "ab 499 €"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Wie lange dauert die Erstellung einer Website?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Landingpage in 5–7 Werktagen, mehrseitige Unternehmenswebsite in 10–14 Werktagen. Voraussetzung: Inhalte werden zeitnah bereitgestellt." }
+    },
+    {
+      "@type": "Question",
+      "name": "Was kostet eine Website bei NGBuild?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Pakete ab 499 € (Landingpage) bis 999 € (Unternehmenswebsite). Individuelle Projekte auf Anfrage. Alle Preise sind Netto-Einmalzahlungen." }
+    },
+    {
+      "@type": "Question",
+      "name": "Brauche ich technische Kenntnisse?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Nein. Ich begleite Sie durch den gesamten Prozess und erkläre jeden Schritt verständlich." }
+    },
+    {
+      "@type": "Question",
+      "name": "Funktioniert die Seite auch auf dem Smartphone?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Ja, immer. Jede Website ist vollständig responsive und passt sich automatisch an jede Bildschirmgröße an." }
+    },
+    {
+      "@type": "Question",
+      "name": "Was passiert nach dem Launch?",
+      "acceptedAnswer": { "@type": "Answer", "text": "14 Tage kostenlose Erreichbarkeit für Anpassungen nach Launch. Optional laufende Wartungsvereinbarung oder vollständige Code-Übergabe." }
+    },
+    {
+      "@type": "Question",
+      "name": "Kann ich die Seite später selbst bearbeiten?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Ja. Für einfache Änderungen kann ein CMS integriert werden. Sie erhalten immer den vollständigen Quellcode." }
+    }
+  ]
+}
+</script>
 <style>
 /* ===== FONT (System-Stack mit Inter) ===== */
 :root {
@@ -24,15 +107,270 @@
   --nav-height: 64px;
 }
 
-/* ===== DARK MODE (default dark, light override) ===== */
-@media (prefers-color-scheme: light) {
-  :root {
-    --bg: #f0f4f8;
-    --surface: #ffffff;
-    --text: #1e293b;
-    --text-muted: #64748b;
-    --white: #1e293b;
-  }
+/* ===== LIGHT MODE (Klasse auf <html>) ===== */
+html.light-mode {
+  --bg: #f0f4f8;
+  --surface: #ffffff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --white: #1e293b;
+}
+html.light-mode body {
+  background: var(--bg);
+  color: var(--text);
+}
+/* Navbar im Light Mode */
+html.light-mode #navbar {
+  background: rgba(240,244,248,.85);
+  border-bottom-color: rgba(0,0,0,.08);
+}
+html.light-mode #mobile-nav {
+  background: rgba(240,244,248,.97);
+}
+/* Transition für sanften Wechsel */
+body, #navbar, .service-card, .testimonial-card, .pricing-card,
+.cs-card, .stat-card, .faq-item, .no-reviews-box, #trust-bar,
+input, textarea {
+  transition: background-color .35s ease, border-color .35s ease, color .2s ease;
+}
+
+/* ===== THEME TOGGLE ===== */
+#theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 26px;
+  border-radius: 13px;
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.15);
+  cursor: pointer;
+  position: relative;
+  transition: background .3s, border-color .3s;
+  flex-shrink: 0;
+  padding: 0;
+}
+#theme-toggle:hover {
+  background: rgba(255,255,255,.18);
+  border-color: rgba(255,255,255,.3);
+}
+#theme-toggle:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px;
+}
+.toggle-thumb {
+  position: absolute;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,.3);
+  transition: transform .35s cubic-bezier(.34,1.56,.64,1), background .3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.toggle-icon {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  transition: opacity .25s ease, transform .35s ease;
+}
+.toggle-icon-moon { opacity: 1; transform: rotate(0deg) scale(1); color: #2563eb; }
+.toggle-icon-sun  { opacity: 0; transform: rotate(90deg) scale(.6); color: #f59e0b; }
+
+/* Light-Mode-Zustand des Toggles */
+html.light-mode #theme-toggle {
+  background: rgba(37,99,235,.12);
+  border-color: rgba(37,99,235,.25);
+}
+html.light-mode .toggle-thumb {
+  transform: translateX(18px);
+  background: #fff;
+}
+html.light-mode .toggle-icon-moon { opacity: 0; transform: rotate(-90deg) scale(.6); }
+html.light-mode .toggle-icon-sun  { opacity: 1; transform: rotate(0deg) scale(1); }
+
+/* ===== LIGHT MODE: HERO ===== */
+html.light-mode #hero .hero-sub { color: rgba(30,41,59,.75); }
+html.light-mode #hero {
+  --cyber-bg: #f5f8ff;
+  --cyber-neon: #2563eb;
+  --cyber-muted: #93c5fd;
+  background-color: var(--cyber-bg);
+  background-image:
+    radial-gradient(ellipse 70% 55% at 65% 20%, rgba(37,99,235,.11) 0%, transparent 60%),
+    radial-gradient(ellipse 45% 35% at 15% 72%, rgba(56,189,248,.07) 0%, transparent 55%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20'%3E%3Ccircle cx='0' cy='0' r='1' fill='%2393c5fd' opacity='.55'/%3E%3C/svg%3E");
+  background-size: 100% 100%, 100% 100%, 20px 20px;
+  color: var(--text);
+}
+html.light-mode #hero::after {
+  background: linear-gradient(to bottom, transparent 0%, #f5f8ff 100%);
+}
+html.light-mode .hero-binary {
+  color: rgba(37,99,235,.06);
+}
+html.light-mode #hero .btn-ghost {
+  color: #1e293b;
+  border-color: rgba(37,99,235,.4);
+}
+html.light-mode #hero .btn-ghost:hover {
+  border-color: var(--blue);
+  background: rgba(37,99,235,.08);
+}
+
+/* ===== LIGHT MODE: SHARD / LOGO SHATTER ===== */
+html.light-mode .shard-inner {
+  -webkit-text-stroke-color: #2563eb;
+  filter:
+    drop-shadow(0 0 3px rgba(37,99,235,.7))
+    drop-shadow(0 0 12px rgba(37,99,235,.4))
+    drop-shadow(0 0 32px rgba(37,99,235,.15));
+}
+
+/* ===== LIGHT MODE: TRUST BAR ===== */
+html.light-mode #trust-bar {
+  background: rgba(240,244,248,.97);
+  border-top-color: rgba(37,99,235,.12);
+  border-bottom-color: rgba(37,99,235,.12);
+}
+html.light-mode .trust-divider {
+  background: rgba(0,0,0,.1);
+}
+
+/* ===== LIGHT MODE: LEISTUNGEN ===== */
+html.light-mode #leistungen {
+  background: linear-gradient(to bottom, #f5f8ff 0%, var(--surface) 200px);
+}
+html.light-mode .service-card {
+  border-color: rgba(0,0,0,.07);
+}
+html.light-mode .service-card:hover {
+  box-shadow: 0 8px 32px rgba(37,99,235,.12), 0 0 48px rgba(37,99,235,.06);
+}
+
+/* ===== LIGHT MODE: PROZESS ===== */
+html.light-mode .process-line {
+  background: rgba(0,0,0,.07);
+}
+html.light-mode .process-num {
+  border-color: rgba(0,0,0,.1);
+}
+html.light-mode .pv-wire {
+  background: rgba(0,0,0,.07);
+}
+
+/* CPU-SVG: dunkle Füllfarben → hell (CSS überschreibt SVG-Presentation-Attribute) */
+html.light-mode .pv-cpu svg rect[fill="#060e1f"] { fill: #f0f6ff; }
+html.light-mode .pv-cpu svg rect[fill="#0a1628"] { fill: #e4efff; }
+html.light-mode .pv-cpu svg rect[fill="#0f1e3a"] { fill: #dce9ff; }
+html.light-mode .pv-cpu svg line[stroke="#1e3a6e"] { stroke: #93c5fd; }
+html.light-mode .pv-cpu svg rect[stroke="#1e40af"] { stroke: #60a5fa; }
+html.light-mode .pv-cpu svg text[fill="#38bdf8"] { fill: #2563eb; }
+
+/* Browser-SVG: dunkle Füllfarben → hell */
+html.light-mode .pv-web svg rect[fill="#060e1f"] { fill: #f0f6ff; }
+html.light-mode .pv-web svg rect[fill="#0a1628"] { fill: #e4efff; }
+html.light-mode .pv-web svg rect[fill="#0f1e3a"] { fill: #dce9ff; }
+html.light-mode .pv-web svg rect[fill="#0e1f3d"] { fill: #dce9ff; }
+html.light-mode .pv-web svg rect[stroke="#1e3a6e"] { stroke: #93c5fd; }
+
+/* Beam-Kern im Light Mode: sichtbarer blau statt weiß-cyan */
+html.light-mode #pv-beam-core { stroke: #2563eb; }
+html.light-mode #pv-beam-glow { stroke: #60a5fa; opacity: .45; }
+
+/* Website-Icon Glow reduzieren im Light Mode */
+html.light-mode .pv-web svg {
+  filter: drop-shadow(0 0 4px rgba(37,99,235,.2));
+}
+
+/* ===== LIGHT MODE: FAQ ===== */
+html.light-mode .faq-item {
+  border-bottom-color: rgba(0,0,0,.08);
+}
+html.light-mode .faq-icon {
+  border-color: rgba(0,0,0,.15);
+}
+
+/* ===== LIGHT MODE: PREISE ===== */
+html.light-mode .pricing-card {
+  border-color: rgba(0,0,0,.07);
+}
+html.light-mode .pricing-divider {
+  background: rgba(0,0,0,.07);
+}
+html.light-mode .pricing-cta-ghost {
+  border-color: rgba(0,0,0,.15);
+}
+
+/* ===== LIGHT MODE: TESTIMONIALS / NO-REVIEWS ===== */
+html.light-mode .testimonial-card {
+  border-color: rgba(0,0,0,.07);
+}
+html.light-mode .testimonial-card:hover {
+  border-color: rgba(37,99,235,.2);
+}
+html.light-mode .testimonial-author {
+  border-top-color: rgba(0,0,0,.07);
+}
+
+/* ===== LIGHT MODE: CASE STUDIES ===== */
+html.light-mode .cs-card {
+  border-color: rgba(0,0,0,.07);
+}
+html.light-mode .cs-card:hover {
+  border-color: rgba(37,99,235,.2);
+  box-shadow: 0 8px 32px rgba(37,99,235,.1);
+}
+html.light-mode .cs-header {
+  border-bottom-color: rgba(0,0,0,.06);
+}
+html.light-mode .cs-stack span {
+  background: rgba(0,0,0,.04);
+  border-color: rgba(0,0,0,.08);
+}
+html.light-mode .cs-footer {
+  border-top-color: rgba(0,0,0,.06);
+}
+
+/* ===== LIGHT MODE: STAT CARDS ===== */
+html.light-mode .stat-card {
+  border-color: rgba(0,0,0,.07);
+}
+
+/* ===== LIGHT MODE: KONTAKT FORMULAR ===== */
+html.light-mode .form-group input,
+html.light-mode .form-group textarea,
+html.light-mode .form-group select {
+  border-color: rgba(0,0,0,.13);
+  background: #fff;
+  color: var(--text);
+}
+html.light-mode .form-group input::placeholder,
+html.light-mode .form-group textarea::placeholder {
+  color: #94a3b8;
+}
+
+/* ===== LIGHT MODE: PORTFOLIO OVERLAYS ===== */
+html.light-mode .portfolio-overlay {
+  background: rgba(240,244,248,.92);
+  color: var(--text);
+}
+html.light-mode .pf-card-overlay {
+  background: rgba(240,244,248,.92);
+  color: var(--text);
+}
+
+/* ===== LIGHT MODE: FOOTER ===== */
+html.light-mode #footer {
+  border-top-color: rgba(0,0,0,.08);
+}
+
+/* ===== LIGHT MODE: SKELETON ===== */
+html.light-mode .skeleton::after {
+  background: linear-gradient(90deg, transparent, rgba(0,0,0,.04), transparent);
 }
 
 /* ===== RESET ===== */
@@ -61,6 +399,7 @@ input, textarea, select { font-family: inherit; }
 }
 .section-pad { padding: 120px 0; }
 .section-title {
+  font-family: 'Montserrat', var(--font);
   font-size: clamp(2rem, 5vw, 3.5rem);
   font-weight: 700;
   margin-bottom: 16px;
@@ -383,6 +722,7 @@ input, textarea, select { font-family: inherit; }
   max-width: 680px;
 }
 .hero-headline {
+  font-family: 'Montserrat', var(--font);
   font-size: clamp(3rem, 6vw, 5rem);
   font-weight: 800;
   letter-spacing: -0.03em;
@@ -458,6 +798,48 @@ input, textarea, select { font-family: inherit; }
   user-select: none;
   white-space: nowrap;
   line-height: 1;
+}
+
+/* ===== TRUST-BAR ===== */
+#trust-bar {
+  background: rgba(14,20,32,.95);
+  border-top: 1px solid rgba(37,99,235,.15);
+  border-bottom: 1px solid rgba(37,99,235,.15);
+  padding: 18px 0;
+  position: relative;
+  z-index: 10;
+}
+.trust-bar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px 40px;
+}
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: .85rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+.trust-item svg {
+  color: var(--cyan);
+  flex-shrink: 0;
+}
+.trust-divider {
+  width: 1px;
+  height: 16px;
+  background: rgba(255,255,255,.08);
+}
+@media (max-width: 768px) {
+  .trust-bar-inner { gap: 10px 24px; }
+  .trust-item { font-size: .8rem; }
+  .trust-divider { display: none; }
+}
+@media (max-width: 480px) {
+  .trust-bar-inner { gap: 8px 16px; }
 }
 
 /* ===== LEISTUNGEN ===== */
@@ -753,6 +1135,324 @@ input, textarea, select { font-family: inherit; }
   .process-step { gap: 14px; }
 }
 
+/* ===== FAQ ===== */
+#faq {
+  background: var(--surface);
+}
+.faq-list {
+  max-width: 760px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.faq-item {
+  border-bottom: 1px solid rgba(255,255,255,.07);
+}
+.faq-question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 22px 0;
+  text-align: left;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+  gap: 16px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-family: inherit;
+}
+.faq-question:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; border-radius: 4px; }
+.faq-icon {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color .2s, transform .3s;
+  color: var(--text-muted);
+}
+.faq-item.open .faq-icon {
+  border-color: var(--blue);
+  color: var(--cyan);
+  transform: rotate(45deg);
+}
+.faq-icon svg { width: 12px; height: 12px; }
+.faq-answer {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height .35s ease;
+}
+.faq-answer-inner {
+  padding: 0 0 20px;
+  font-size: .92rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+}
+
+/* ===== PREISE ===== */
+#preise {
+  background: var(--bg);
+}
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+@media (max-width: 900px) {
+  .pricing-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
+}
+@media (max-width: 768px) {
+  .pricing-grid { gap: 16px; }
+}
+.pricing-card {
+  background: var(--surface);
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: var(--radius);
+  padding: 36px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  transition: border-color .3s, transform .2s, box-shadow .3s;
+  position: relative;
+}
+.pricing-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(37,99,235,.12);
+}
+.pricing-card.featured {
+  border-color: var(--blue);
+  box-shadow: 0 0 40px rgba(37,99,235,.15);
+}
+.pricing-badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--blue);
+  color: #fff;
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding: 4px 14px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+.pricing-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  margin-bottom: 8px;
+}
+.pricing-price {
+  font-size: 2.4rem;
+  font-weight: 800;
+  letter-spacing: -.02em;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+.pricing-price span {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+.pricing-sub {
+  font-size: .82rem;
+  color: var(--text-muted);
+  margin-bottom: 28px;
+}
+.pricing-divider {
+  height: 1px;
+  background: rgba(255,255,255,.06);
+  margin-bottom: 24px;
+}
+.pricing-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 32px;
+  flex: 1;
+}
+.pricing-features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: .88rem;
+  color: var(--text);
+}
+.pricing-features li svg {
+  color: var(--cyan);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.pricing-cta {
+  display: block;
+  text-align: center;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: .9rem;
+  transition: background .2s, transform .15s, box-shadow .2s;
+}
+.pricing-cta-primary {
+  background: var(--blue);
+  color: #fff;
+}
+.pricing-cta-primary:hover { background: #1d4ed8; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(37,99,235,.35); }
+.pricing-cta-ghost {
+  border: 1px solid rgba(255,255,255,.15);
+  color: var(--text);
+}
+.pricing-cta-ghost:hover { border-color: var(--blue-light); background: rgba(37,99,235,.08); transform: translateY(-2px); }
+.pricing-note {
+  text-align: center;
+  margin-top: 40px;
+  font-size: .85rem;
+  color: var(--text-muted);
+}
+
+/* ===== TESTIMONIALS ===== */
+#testimonials {
+  background: var(--bg);
+}
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+@media (max-width: 900px) {
+  .testimonials-grid { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; }
+}
+@media (max-width: 768px) {
+  .testimonials-grid { gap: 16px; }
+}
+.testimonial-card {
+  background: var(--surface);
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: var(--radius);
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  transition: border-color .3s, transform .2s;
+}
+.testimonial-card:hover {
+  border-color: rgba(56,189,248,.2);
+  transform: translateY(-3px);
+}
+.testimonial-stars {
+  display: flex;
+  gap: 3px;
+}
+.testimonial-stars svg {
+  color: #f59e0b;
+  fill: #f59e0b;
+}
+.testimonial-quote {
+  font-size: .95rem;
+  color: var(--text);
+  line-height: 1.7;
+  flex: 1;
+  position: relative;
+}
+.testimonial-quote::before {
+  content: '\201E';
+  font-size: 3rem;
+  color: var(--blue);
+  line-height: 0;
+  position: relative;
+  top: 14px;
+  margin-right: 4px;
+  opacity: .6;
+}
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-top: 1px solid rgba(255,255,255,.06);
+  padding-top: 16px;
+}
+.testimonial-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--blue), var(--cyan));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: .9rem;
+  color: #fff;
+  flex-shrink: 0;
+}
+.testimonial-name {
+  font-weight: 600;
+  font-size: .9rem;
+}
+.testimonial-role {
+  font-size: .8rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+.testimonials-cta {
+  text-align: center;
+  margin-top: 48px;
+}
+.testimonials-cta p {
+  color: var(--text-muted);
+  margin-bottom: 16px;
+  font-size: .95rem;
+}
+.no-reviews-box {
+  max-width: 600px;
+  margin: 0 auto;
+  background: var(--surface);
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: var(--radius);
+  padding: 56px 48px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+.no-reviews-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: rgba(37,99,235,.08);
+  border: 1px solid rgba(37,99,235,.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--blue-light);
+  margin-bottom: 8px;
+}
+.no-reviews-box h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+.no-reviews-box p {
+  color: var(--text-muted);
+  font-size: .95rem;
+  line-height: 1.75;
+  max-width: 480px;
+}
+@media (max-width: 480px) {
+  .no-reviews-box { padding: 36px 24px; }
+}
+
 /* ===== PORTFOLIO ===== */
 .portfolio-grid {
   display: grid;
@@ -844,6 +1544,125 @@ input, textarea, select { font-family: inherit; }
   font-size: .85rem;
   margin-top: 4px;
 }
+
+/* ===== CASE STUDIES ===== */
+.case-studies-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+@media (max-width: 900px) {
+  .case-studies-grid { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; }
+}
+@media (max-width: 768px) {
+  .case-studies-grid { gap: 16px; }
+}
+.cs-card {
+  background: var(--surface);
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: var(--radius);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: border-color .3s, transform .2s, box-shadow .3s;
+}
+.cs-card:hover {
+  border-color: rgba(56,189,248,.2);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(37,99,235,.12);
+}
+.cs-header {
+  padding: 28px 28px 20px;
+  background: linear-gradient(135deg, rgba(37,99,235,.12) 0%, rgba(56,189,248,.05) 100%);
+  border-bottom: 1px solid rgba(255,255,255,.05);
+}
+.cs-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+.cs-tag {
+  font-size: .7rem;
+  font-weight: 600;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 20px;
+  background: rgba(37,99,235,.2);
+  color: var(--blue-light);
+  border: 1px solid rgba(37,99,235,.3);
+}
+.cs-tag.live {
+  background: rgba(16,185,129,.15);
+  color: #34d399;
+  border-color: rgba(16,185,129,.3);
+}
+.cs-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.cs-branch {
+  font-size: .82rem;
+  color: var(--text-muted);
+}
+.cs-body {
+  padding: 20px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+}
+.cs-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.cs-label {
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--blue-light);
+}
+.cs-text {
+  font-size: .88rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+.cs-result {
+  font-size: .88rem;
+  color: var(--text);
+  font-weight: 500;
+}
+.cs-stack {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.cs-stack span {
+  font-size: .72rem;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: rgba(255,255,255,.05);
+  color: var(--text-muted);
+  border: 1px solid rgba(255,255,255,.07);
+}
+.cs-footer {
+  padding: 16px 28px 24px;
+  border-top: 1px solid rgba(255,255,255,.05);
+}
+.cs-footer a {
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--cyan);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: gap .2s;
+}
+.cs-footer a:hover { gap: 10px; }
 
 /* ===== FOLDER PORTFOLIO ===== */
 .portfolio-grid { display: none; }
@@ -1184,9 +2003,28 @@ input, textarea, select { font-family: inherit; }
 .about-avatar svg { width: 28px; height: 28px; color: #fff; }
 .about-name { font-weight: 700; font-size: 1.05rem; }
 .about-role { font-size: .85rem; color: var(--text-muted); margin-top: 2px; }
+.tech-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 28px;
+}
+.tech-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: .78rem;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 6px;
+  background: rgba(37,99,235,.1);
+  border: 1px solid rgba(37,99,235,.2);
+  color: var(--blue-light);
+  letter-spacing: .02em;
+}
 .stats-grid {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 20px;
 }
 .stat-card {
@@ -1229,6 +2067,12 @@ input, textarea, select { font-family: inherit; }
   .about-profile { padding: 16px 18px; gap: 14px; }
   .about-avatar { width: 52px; height: 52px; }
   .stat-card { padding: 28px 20px; }
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 480px) {
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+  .tech-badges { gap: 6px; }
+  .tech-badge { font-size: .72rem; padding: 4px 10px; }
 }
 
 /* ===== KONTAKT ===== */
@@ -1375,70 +2219,6 @@ input, textarea, select { font-family: inherit; }
 .footer-links a:hover { color: var(--white); }
 .footer-links a:focus-visible { outline: 2px solid var(--cyan); outline-offset: 4px; border-radius: 2px; }
 
-/* ===== LEGAL PAGES ===== */
-.legal-section {
-  display: none;
-  padding: 120px 0 80px;
-}
-.legal-section.active {
-  display: block;
-}
-.legal-content {
-  max-width: 780px;
-}
-.legal-content h2 {
-  font-size: clamp(1.8rem, 4vw, 2.5rem);
-  font-weight: 700;
-  margin-bottom: 32px;
-  letter-spacing: -0.02em;
-}
-.legal-content h3 {
-  font-size: 1.15rem;
-  font-weight: 600;
-  margin-top: 32px;
-  margin-bottom: 12px;
-  color: var(--white);
-}
-.legal-content p,
-.legal-content li {
-  color: var(--text-muted);
-  font-size: .95rem;
-  line-height: 1.8;
-  margin-bottom: 12px;
-}
-.legal-content ul {
-  list-style: disc;
-  padding-left: 24px;
-  margin-bottom: 16px;
-}
-.legal-content a {
-  color: var(--blue-light);
-  text-decoration: underline;
-}
-.legal-content a:focus-visible {
-  outline: 2px solid var(--cyan);
-  outline-offset: 2px;
-}
-.legal-back {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 32px;
-  font-size: .9rem;
-  color: var(--blue-light);
-  cursor: pointer;
-  background: none;
-  border: none;
-  font-family: inherit;
-  transition: color .2s;
-}
-.legal-back:hover { color: var(--white); }
-.legal-back:focus-visible { outline: 2px solid var(--cyan); outline-offset: 4px; }
-.legal-back svg { width: 18px; height: 18px; }
-@media (max-width: 768px) {
-  .legal-section { padding: 88px 0 60px; }
-  .legal-content h3 { margin-top: 24px; }
-}
 
 /* ===== SKELETON ===== */
 .skeleton {
@@ -1523,16 +2303,38 @@ input, textarea, select { font-family: inherit; }
 <!-- ===== NAVBAR ===== -->
 <nav id="navbar" aria-label="Hauptnavigation">
   <div class="container">
-    <a href="#hero" class="nav-logo" aria-label="NGBuild - Zur Startseite">
-      <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="32" height="32">
-        <path d="M30 160V40l50 120V40" stroke="#2563eb" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M170 80a60 60 0 1 1-60-40h0v80h-20" stroke="#2563eb" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-        <line x1="10" y1="185" x2="190" y2="185" stroke="#38bdf8" stroke-width="2"/>
-        <circle cx="10" cy="185" r="3" fill="#38bdf8"/>
-        <circle cx="190" cy="185" r="3" fill="#38bdf8"/>
-      </svg>
-      NGBuild
-    </a>
+    <div style="display:flex;align-items:center;gap:14px;">
+      <a href="#hero" class="nav-logo" aria-label="NGBuild - Zur Startseite">
+        <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="32" height="32">
+          <path d="M30 160V40l50 120V40" stroke="#2563eb" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M170 80a60 60 0 1 1-60-40h0v80h-20" stroke="#2563eb" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+          <line x1="10" y1="185" x2="190" y2="185" stroke="#38bdf8" stroke-width="2"/>
+          <circle cx="10" cy="185" r="3" fill="#38bdf8"/>
+          <circle cx="190" cy="185" r="3" fill="#38bdf8"/>
+        </svg>
+        NGBuild
+      </a>
+      <button id="theme-toggle" aria-label="Hell-/Dunkelmodus wechseln" aria-pressed="false">
+        <span class="toggle-thumb">
+          <!-- Mond (Dark) -->
+          <svg class="toggle-icon toggle-icon-moon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 1 0 9.79 9.79z"/>
+          </svg>
+          <!-- Sonne (Light) -->
+          <svg class="toggle-icon toggle-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="5"/>
+            <line x1="12" y1="1" x2="12" y2="3"/>
+            <line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1" y1="12" x2="3" y2="12"/>
+            <line x1="21" y1="12" x2="23" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </svg>
+        </span>
+      </button>
+    </div>
     <div class="nav-links">
       <div class="nav-dropdown" id="nav-dropdown">
         <button class="nav-dropdown-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="dropdown-menu">
@@ -1546,10 +2348,11 @@ input, textarea, select { font-family: inherit; }
           <a href="#leistungen" role="menuitem">SEO-Optimierung</a>
         </div>
       </div>
-      <a href="#portfolio">Portfolio</a>
-      <a href="#ueber-uns">Über uns</a>
+      <a href="#preise">Preise</a>
+      <a href="#portfolio">Referenzen</a>
+      <a href="#ueber-uns">Über mich</a>
       <a href="#kontakt">Kontakt</a>
-      <a href="#kontakt" class="btn-primary nav-cta">Projekt starten</a>
+      <a href="#kontakt" class="btn-primary nav-cta">Kostenlos beraten</a>
     </div>
     <button id="hamburger" aria-label="Menü öffnen" aria-expanded="false">
       <span></span><span></span><span></span>
@@ -1565,10 +2368,11 @@ input, textarea, select { font-family: inherit; }
   <a href="#leistungen" class="mobile-sub">Landingpages</a>
   <a href="#leistungen" class="mobile-sub">Individuelle Lösungen</a>
   <a href="#leistungen" class="mobile-sub">SEO-Optimierung</a>
-  <a href="#portfolio">Portfolio</a>
-  <a href="#ueber-uns">Über uns</a>
+  <a href="#preise">Preise</a>
+  <a href="#portfolio">Referenzen</a>
+  <a href="#ueber-uns">Über mich</a>
   <a href="#kontakt">Kontakt</a>
-  <a href="#kontakt" class="btn-primary" style="text-align:center;margin-top:16px;">Projekt starten</a>
+  <a href="#kontakt" class="btn-primary" style="text-align:center;margin-top:16px;">Kostenlos beraten lassen</a>
 </div>
 
 <!-- ===== HERO ===== -->
@@ -1595,9 +2399,9 @@ input, textarea, select { font-family: inherit; }
   <div class="container" style="display:flex;align-items:center;position:relative;z-index:3;">
     <div class="hero-content">
       <h1 class="hero-headline" aria-label="Webseiten die begeistern."><span id="typewriter"></span><span class="cursor" aria-hidden="true"></span></h1>
-      <p class="hero-sub">Professionelles Webdesign für Ihr Unternehmen — modern, schnell und individuell.</p>
+      <p class="hero-sub">Professionelle Webseiten für Ihr Unternehmen — modern, schnell und DSGVO-konform. Fertig in 7–14 Tagen.</p>
       <div class="hero-ctas">
-        <a href="#kontakt" class="btn-primary">Projekt starten
+        <a href="#kontakt" class="btn-primary">Kostenlos beraten lassen
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
         <a href="#portfolio" class="btn-ghost">Referenzen ansehen</a>
@@ -1605,6 +2409,38 @@ input, textarea, select { font-family: inherit; }
     </div>
   </div>
 </section>
+
+<!-- ===== TRUST-BAR ===== -->
+<div id="trust-bar" aria-label="Unsere Versprechen">
+  <div class="container">
+    <div class="trust-bar-inner">
+      <div class="trust-item">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+        Fertig in 7–14 Tagen
+      </div>
+      <div class="trust-divider" aria-hidden="true"></div>
+      <div class="trust-item">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+        Kostenlose Erstberatung
+      </div>
+      <div class="trust-divider" aria-hidden="true"></div>
+      <div class="trust-item">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+        24h Reaktionszeit
+      </div>
+      <div class="trust-divider" aria-hidden="true"></div>
+      <div class="trust-item">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+        DSGVO-konform gebaut
+      </div>
+      <div class="trust-divider" aria-hidden="true"></div>
+      <div class="trust-item">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+        Made in Deutschland
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- ===== LEISTUNGEN ===== -->
 <section id="leistungen" class="section-pad">
@@ -1838,16 +2674,186 @@ input, textarea, select { font-family: inherit; }
   </div>
 </section>
 
-<!-- ===== PORTFOLIO ===== -->
-<section id="portfolio" class="section-pad" style="overflow:visible;">
+<!-- ===== PREISE ===== -->
+<section id="preise" class="section-pad">
   <div class="container">
     <div class="reveal">
-      <h2 class="section-title">Portfolio</h2>
-      <p class="section-sub">Ausgewählte Projekte, die unsere Arbeit zeigen.</p>
+      <h2 class="section-title">Transparente Preise</h2>
+      <p class="section-sub">Kein Versteckspiel — klare Pakete für klare Anforderungen. Alle Preise sind Nettopreise.</p>
+    </div>
+    <div class="pricing-grid">
+
+      <div class="pricing-card reveal">
+        <div class="pricing-name">Starter</div>
+        <div class="pricing-price">499 <span>€</span></div>
+        <div class="pricing-sub">Einmalig, ideal für Einsteiger</div>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Landingpage (1 Seite)</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Kontaktformular</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Mobiloptimiert (Responsive)</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> DSGVO-konform</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Fertig in ~7 Tagen</li>
+        </ul>
+        <a href="#kontakt" class="pricing-cta pricing-cta-ghost">Paket anfragen</a>
+      </div>
+
+      <div class="pricing-card featured reveal">
+        <div class="pricing-badge">Beliebteste Wahl</div>
+        <div class="pricing-name">Professional</div>
+        <div class="pricing-price">999 <span>€</span></div>
+        <div class="pricing-sub">Einmalig, für wachsende Unternehmen</div>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Unternehmenswebsite (bis 8 Seiten)</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Kontakt- &amp; Anfrage-Formulare</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Mobiloptimiert &amp; barrierefrei</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Basis-SEO-Optimierung</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> DSGVO-konform</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Fertig in ~14 Tagen</li>
+        </ul>
+        <a href="#kontakt" class="pricing-cta pricing-cta-primary">Paket anfragen</a>
+      </div>
+
+      <div class="pricing-card reveal">
+        <div class="pricing-name">Maßanfertigung</div>
+        <div class="pricing-price" style="font-size:1.8rem;">Auf Anfrage</div>
+        <div class="pricing-sub">Für individuelle &amp; komplexe Projekte</div>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Web-Applikationen</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> API-Anbindungen</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Datenbankintegration</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Individuelle Features</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Zeitplan nach Absprache</li>
+        </ul>
+        <a href="#kontakt" class="pricing-cta pricing-cta-ghost">Gespräch buchen</a>
+      </div>
+
+    </div>
+    <p class="pricing-note reveal">Alle Preise verstehen sich als Netto-Einmalzahlung. Hosting &amp; Domain nicht enthalten.<br>Nicht sicher, welches Paket passt? <a href="#kontakt" style="color:var(--blue-light);">Einfach fragen — kostenlos.</a></p>
+  </div>
+</section>
+
+<!-- ===== PORTFOLIO ===== -->
+<section id="portfolio" class="section-pad">
+  <div class="container">
+    <div class="reveal">
+      <h2 class="section-title">Referenzprojekte</h2>
+      <p class="section-sub">Echte Projekte — mit dem Problem dahinter, der Lösung und dem Ergebnis.</p>
     </div>
 
-    <!-- Desktop: Folder-Effekt -->
-    <div class="pf-wrap">
+    <div class="case-studies-grid">
+
+      <!-- Case Study 1: Holzwerk -->
+      <div class="cs-card reveal">
+        <div class="cs-header">
+          <div class="cs-tags">
+            <span class="cs-tag">Unternehmenswebsite</span>
+            <span class="cs-tag live">Live</span>
+          </div>
+          <div class="cs-title">Waldmeister Holzwerk</div>
+          <div class="cs-branch">Handwerk &amp; Schreinerei, Deutschland</div>
+        </div>
+        <div class="cs-body">
+          <div class="cs-row">
+            <div class="cs-label">Ausgangslage</div>
+            <div class="cs-text">Kein Onlineauftritt vorhanden. Kunden fanden den Betrieb nur über Empfehlungen — Anfragen kamen kaum über das Internet.</div>
+          </div>
+          <div class="cs-row">
+            <div class="cs-label">Lösung</div>
+            <div class="cs-text">Vollständige Unternehmenswebsite mit Leistungsübersicht, Bildergalerie, Materialkunde und Kontaktformular im Stil des traditionellen Handwerks.</div>
+          </div>
+          <div class="cs-row">
+            <div class="cs-label">Ergebnis</div>
+            <div class="cs-result">Fertig in 12 Tagen · Erste Anfragen über die Website noch vor offiziellem Launch · Mobiloptimiert &amp; DSGVO-konform</div>
+          </div>
+          <div class="cs-row">
+            <div class="cs-label">Tech-Stack</div>
+            <div class="cs-stack">
+              <span>HTML5</span><span>CSS3</span><span>Vanilla JS</span>
+            </div>
+          </div>
+        </div>
+        <div class="cs-footer">
+          <a href="#kontakt">Ähnliches Projekt anfragen <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+      </div>
+
+      <!-- Case Study 2: Landingpage -->
+      <div class="cs-card reveal">
+        <div class="cs-header">
+          <div class="cs-tags">
+            <span class="cs-tag">Landingpage</span>
+            <span class="cs-tag" style="background:rgba(245,158,11,.12);color:#fbbf24;border-color:rgba(245,158,11,.3);">Beispiel</span>
+          </div>
+          <div class="cs-title">Dienstleister-Landingpage</div>
+          <div class="cs-branch">Beratung &amp; Dienstleistung</div>
+        </div>
+        <div class="cs-body">
+          <div class="cs-row">
+            <div class="cs-label">Ausgangslage</div>
+            <div class="cs-text">Bestehende Seite war veraltet, lud zu langsam und hatte keine klare Handlungsaufforderung — Besucher sprangen ab, ohne Kontakt aufzunehmen.</div>
+          </div>
+          <div class="cs-row">
+            <div class="cs-label">Lösung</div>
+            <div class="cs-text">Schlanke Landingpage mit klarer USP-Kommunikation, Vertrauenselementen und optimierten CTAs — auf Conversion ausgerichtet.</div>
+          </div>
+          <div class="cs-row">
+            <div class="cs-label">Ergebnis</div>
+            <div class="cs-result">Ladezeit unter 1,5 Sek. · Lighthouse-Score 98+ · Klare Nutzerführung zur Kontaktaufnahme</div>
+          </div>
+          <div class="cs-row">
+            <div class="cs-label">Tech-Stack</div>
+            <div class="cs-stack">
+              <span>HTML5</span><span>CSS3</span><span>Vanilla JS</span>
+            </div>
+          </div>
+        </div>
+        <div class="cs-footer">
+          <a href="#kontakt">Landingpage anfragen <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+      </div>
+
+      <!-- Case Study 3: Web-App -->
+      <div class="cs-card reveal">
+        <div class="cs-header">
+          <div class="cs-tags">
+            <span class="cs-tag">Web-Applikation</span>
+            <span class="cs-tag" style="background:rgba(245,158,11,.12);color:#fbbf24;border-color:rgba(245,158,11,.3);">Konzept</span>
+          </div>
+          <div class="cs-title">Interne Auftragsverwaltung</div>
+          <div class="cs-branch">Kleinbetrieb &amp; Handwerk</div>
+        </div>
+        <div class="cs-body">
+          <div class="cs-row">
+            <div class="cs-label">Ausgangslage</div>
+            <div class="cs-text">Aufträge wurden händisch in Excel verwaltet — fehleranfällig, unübersichtlich und ohne Zugriffsschutz für Mitarbeiter.</div>
+          </div>
+          <div class="cs-row">
+            <div class="cs-label">Lösung</div>
+            <div class="cs-text">Einfache browserbasierte Web-App zur Auftragsverfolgung: Anlegen, Filtern, Statusverwaltung — ohne Cloud-Abhängigkeit.</div>
+          </div>
+          <div class="cs-row">
+            <div class="cs-label">Ergebnis</div>
+            <div class="cs-result">Zeiteinsparung ~2 Std./Woche · Übersicht für alle Beteiligten · Lokaler Betrieb, keine Drittserver</div>
+          </div>
+          <div class="cs-row">
+            <div class="cs-label">Tech-Stack</div>
+            <div class="cs-stack">
+              <span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>LocalStorage</span>
+            </div>
+          </div>
+        </div>
+        <div class="cs-footer">
+          <a href="#kontakt">Individuelle Lösung anfragen <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- alter Folder-Wrapper (versteckt, für Desktop-Effekt nicht mehr nötig) -->
+    <div class="pf-wrap" style="display:none;">
       <div class="pf-folder" id="pf-folder" role="button" tabindex="0" aria-expanded="false" aria-label="Portfolio öffnen">
 
         <!-- Folder-Tab -->
@@ -1967,21 +2973,54 @@ input, textarea, select { font-family: inherit; }
   </div>
 </section>
 
+<!-- ===== TESTIMONIALS ===== -->
+<section id="testimonials" class="section-pad">
+  <div class="container">
+    <div class="reveal">
+      <h2 class="section-title">Kundenstimmen</h2>
+      <p class="section-sub">Ehrlichkeit ist mir wichtig — auch hier.</p>
+    </div>
+    <div class="no-reviews-box reveal">
+      <div class="no-reviews-icon" aria-hidden="true">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      </div>
+      <h3>Noch keine Bewertungen vorhanden</h3>
+      <p>NGBuild steckt noch in den Anfängen — deshalb gibt es hier noch keine Kundenstimmen zu zeigen. Ich finde es wichtig, an dieser Stelle ehrlich zu sein statt Bewertungen zu erfinden.</p>
+      <p>Wenn Sie meine Arbeit bereits kennen oder ein Projekt mit mir umgesetzt haben, würde ich mich sehr über Ihr Feedback freuen. Jede Rückmeldung hilft mir, besser zu werden.</p>
+      <a href="mailto:lennartnils979@gmail.com?subject=Feedback%20NGBuild&body=Hallo%20Niels%2C%0A%0Amein%20Feedback%20zu%20deiner%20Arbeit%3A%0A" class="btn-primary" style="margin-top: 8px;">
+        Feedback geben
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
 <!-- ===== UEBER UNS ===== -->
 <section id="ueber-uns" class="section-pad" style="background:var(--surface);">
   <div class="container">
     <div class="about-grid">
       <div class="about-text reveal">
         <h2 class="section-title">Über mich</h2>
-        <p>Hallo! Ich bin Niels Gimmler, der Kopf hinter ngbuild. Als Student der Wirtschaftsinformatik brenne ich für die Schnittstelle zwischen effizienten Prozessen und modernster Technik.</p>
-        <p>Für mich ist ngbuild mehr als nur ein Name – es ist ein Versprechen in zweierlei Hinsicht: <strong>Niels Gimmler Build</strong> — ich stehe persönlich mit meinem Namen für die Qualität und Sorgfalt jedes Projekts, das meine Werkstatt verlässt. <strong>Next Generation Build</strong> — ich nutze aktuelle technologische Standards und zukunftsorientierte Ansätze, um Lösungen zu schaffen, die nicht nur heute funktionieren, sondern auch morgen noch begeistern.</p>
+        <p>Ich bin Niels Gimmler — Wirtschaftsinformatik-Student und der Kopf hinter NGBuild. Webentwicklung ist für mich kein Job, sondern echte Leidenschaft: Ich baue Seiten, die nicht nur gut aussehen, sondern Ihnen tatsächlich neue Kunden bringen.</p>
+        <p>Was mich von großen Agenturen unterscheidet: <strong>Sie reden mit mir</strong> — nicht mit einem wechselnden Team. Ich kenne Ihr Projekt von Anfang bis Ende und bin persönlich für das Ergebnis verantwortlich. <strong>NGBuild</strong> steht für <em>Niels Gimmler Build</em> und <em>Next Generation Build</em> — ein Versprechen an Qualität, Tempo und Zukunftsfähigkeit.</p>
+        <p>Mein Ansatz: Erst verstehen, dann bauen. Bevor ich eine Zeile Code schreibe, lerne ich Ihr Unternehmen kennen — damit die Webseite wirklich zu Ihnen passt.</p>
+        <div class="tech-badges" aria-label="Technologien die ich einsetze">
+          <span class="tech-badge">HTML5</span>
+          <span class="tech-badge">CSS3</span>
+          <span class="tech-badge">JavaScript</span>
+          <span class="tech-badge">Responsive Design</span>
+          <span class="tech-badge">SEO</span>
+          <span class="tech-badge">DSGVO</span>
+          <span class="tech-badge">Performance</span>
+          <span class="tech-badge">Barrierefreiheit</span>
+        </div>
         <div class="about-profile">
           <div class="about-avatar" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/></svg>
           </div>
           <div>
             <div class="about-name">Niels Gimmler</div>
-            <div class="about-role">Student Wirtschaftsinformatik &amp; Gründer ngbuild</div>
+            <div class="about-role">Student Wirtschaftsinformatik &amp; Gründer NGBuild</div>
           </div>
         </div>
       </div>
@@ -1990,7 +3029,92 @@ input, textarea, select { font-family: inherit; }
           <div class="stat-num" data-target="24" data-suffix="h">0</div>
           <div class="stat-label">Reaktionszeit</div>
         </div>
+        <div class="stat-card">
+          <div class="stat-num" data-target="100" data-suffix="%">0</div>
+          <div class="stat-label">DSGVO-konform</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" data-target="14" data-suffix=" Tage">0</div>
+          <div class="stat-label">Ø Lieferzeit</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" data-target="98" data-suffix="+">0</div>
+          <div class="stat-label">Lighthouse-Score</div>
+        </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section id="faq" class="section-pad">
+  <div class="container">
+    <div class="reveal">
+      <h2 class="section-title">Häufige Fragen</h2>
+      <p class="section-sub">Alles Wichtige auf einen Blick — damit Sie wissen, was Sie erwartet.</p>
+    </div>
+    <div class="faq-list reveal" itemscope itemtype="https://schema.org/FAQPage">
+
+      <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <button class="faq-question" aria-expanded="false">
+          <span itemprop="name">Wie lange dauert die Erstellung einer Website?</span>
+          <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </button>
+        <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <div class="faq-answer-inner" itemprop="text">Je nach Paket: Eine Landingpage ist typischerweise in 5–7 Werktagen fertig. Eine mehrseitige Unternehmenswebsite dauert 10–14 Werktage. Voraussetzung ist, dass Inhalte (Texte, Bilder, Logo) zeitnah bereitgestellt werden. Den genauen Zeitplan besprechen wir beim Erstgespräch.</div>
+        </div>
+      </div>
+
+      <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <button class="faq-question" aria-expanded="false">
+          <span itemprop="name">Was kostet eine Website bei NGBuild?</span>
+          <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </button>
+        <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <div class="faq-answer-inner" itemprop="text">Meine Pakete starten bei 499 € (Landingpage) und gehen bis 999 € (professionelle Unternehmenswebsite). Individuelle Web-Applikationen werden auf Anfrage kalkuliert. Alle Preise sind Netto-Einmalzahlungen — keine versteckten Folgekosten durch mich. Hosting und Domain kommen separat hinzu (typisch: 5–15 €/Monat beim Anbieter Ihrer Wahl).</div>
+        </div>
+      </div>
+
+      <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <button class="faq-question" aria-expanded="false">
+          <span itemprop="name">Brauche ich technische Kenntnisse?</span>
+          <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </button>
+        <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <div class="faq-answer-inner" itemprop="text">Nein — überhaupt nicht. Ich begleite Sie durch den gesamten Prozess und erkläre jeden Schritt verständlich. Sie müssen sich um nichts Technisches kümmern. Ich sorge dafür, dass alles läuft.</div>
+        </div>
+      </div>
+
+      <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <button class="faq-question" aria-expanded="false">
+          <span itemprop="name">Funktioniert die Seite auch auf dem Smartphone?</span>
+          <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </button>
+        <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <div class="faq-answer-inner" itemprop="text">Ja, immer. Jede Website, die ich baue, ist vollständig responsive — sie passt sich automatisch an jede Bildschirmgröße an, vom Smartphone bis zum Großbildschirm. Das ist heute keine Option mehr, sondern Standard.</div>
+        </div>
+      </div>
+
+      <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <button class="faq-question" aria-expanded="false">
+          <span itemprop="name">Was passiert nach dem Launch?</span>
+          <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </button>
+        <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <div class="faq-answer-inner" itemprop="text">Nach dem Launch bin ich für 14 Tage kostenlos erreichbar, um kleinere Anpassungen oder Fehler zu beheben. Danach können wir optional eine laufende Wartungsvereinbarung treffen — oder Sie bekommen den vollständigen Quellcode und sind von mir unabhängig.</div>
+        </div>
+      </div>
+
+      <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <button class="faq-question" aria-expanded="false">
+          <span itemprop="name">Kann ich die Seite später selbst bearbeiten?</span>
+          <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </button>
+        <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <div class="faq-answer-inner" itemprop="text">Das kommt auf die Art der Seite an. Für einfache Textänderungen können wir ein leichtes CMS integrieren (z.B. Netlify CMS). Für strukturelle Änderungen arbeite ich gerne mit Ihnen zusammen. In jedem Fall erhalten Sie den vollständigen Code — Sie gehören mir nicht als Dauerkunde.</div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -1999,8 +3123,8 @@ input, textarea, select { font-family: inherit; }
 <section id="kontakt" class="section-pad">
   <div class="container">
     <div class="reveal">
-      <h2 class="section-title">Kontakt</h2>
-      <p class="section-sub">Bereit für Ihr Projekt? Schreiben Sie uns — wir melden uns innerhalb von 24 Stunden.</p>
+      <h2 class="section-title">Jetzt Projekt starten</h2>
+      <p class="section-sub">Kostenlose Erstberatung — kein Risiko, keine Verpflichtung. Ich melde mich innerhalb von 24 Stunden.</p>
     </div>
     <div class="contact-grid">
       <form id="contact-form" class="reveal" novalidate>
@@ -2025,14 +3149,14 @@ input, textarea, select { font-family: inherit; }
         </div>
         <div class="checkbox-group">
           <input type="checkbox" id="cf-privacy" name="privacy" required>
-          <label for="cf-privacy">Ich habe die <a href="#datenschutz">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner Daten zu. *</label>
+          <label for="cf-privacy">Ich habe die <a href="datenschutz.html" target="_blank">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner Daten zu. *</label>
         </div>
         <div id="privacy-error" class="error-msg" style="display:none;margin-bottom:16px;">Bitte stimmen Sie der Datenschutzerklärung zu.</div>
         <button type="submit" class="btn-primary">
           Nachricht senden
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
         </button>
-        <div id="form-success" role="alert">Vielen Dank! Ihre Nachricht wurde erfolgreich gesendet. Wir melden uns in Kürze bei Ihnen.</div>
+        <div id="form-success" role="alert">Ihr E-Mail-Programm öffnet sich gleich mit Ihrer Nachricht vorausgefüllt — bitte einmal auf „Senden" klicken. Wir melden uns innerhalb von 24 Stunden!</div>
       </form>
       <div class="contact-info reveal">
         <div class="contact-item">
@@ -2071,10 +3195,10 @@ input, textarea, select { font-family: inherit; }
 <footer id="footer">
   <div class="container">
     <div class="footer-inner">
-      <div class="footer-copy">&copy; 2025 NGBuild. Alle Rechte vorbehalten.</div>
+      <div class="footer-copy">&copy; 2026 NGBuild. Alle Rechte vorbehalten.</div>
       <div class="footer-links">
-        <a href="#impressum">Impressum</a>
-        <a href="#datenschutz">Datenschutz</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
       </div>
     </div>
   </div>
@@ -2156,12 +3280,17 @@ input, textarea, select { font-family: inherit; }
     }
   }
 
+  function isLight() {
+    return document.documentElement.classList.contains('light-mode');
+  }
+
   function drawPcbOverlay() {
     var w = canvas.width;
     var h = canvas.height;
     if (w < 10 || h < 10) return;
+    var light = isLight();
     ctx.save();
-    ctx.strokeStyle = 'rgba(0, 51, 102, 0.9)';
+    ctx.strokeStyle = light ? 'rgba(37, 99, 235, 0.28)' : 'rgba(0, 51, 102, 0.9)';
     ctx.lineWidth = 1;
     ctx.lineJoin = 'miter';
     ctx.lineCap = 'square';
@@ -2201,7 +3330,7 @@ input, textarea, select { font-family: inherit; }
       [w * 0.88, h * 0.12], [w * 0.72, h * 0.12], [w * 0.72, h * 0.28], [w * 0.62, h * 0.28],
       [w, h * 0.94], [w * 0.82, h * 0.94], [w * 0.82, h * 0.78], [w * 0.68, h * 0.78]
     ];
-    ctx.fillStyle = 'rgba(0, 242, 255, 0.75)';
+    ctx.fillStyle = light ? 'rgba(37, 99, 235, 0.65)' : 'rgba(0, 242, 255, 0.75)';
     for (var n = 0; n < nodes.length; n++) {
       ctx.beginPath();
       ctx.arc(nodes[n][0], nodes[n][1], 2.2, 0, Math.PI * 2);
@@ -2239,9 +3368,10 @@ input, textarea, select { font-family: inherit; }
       if (p.x < 0 || p.x > canvas.width) { p.vx *= -1; p.x = Math.max(0, Math.min(canvas.width, p.x)); }
       if (p.y < 0 || p.y > canvas.height) { p.vy *= -1; p.y = Math.max(0, Math.min(canvas.height, p.y)); }
 
+      var light = isLight();
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(0, 242, 255, 0.28)';
+      ctx.fillStyle = light ? 'rgba(37, 99, 235, 0.45)' : 'rgba(0, 242, 255, 0.28)';
       ctx.fill();
 
       for (var j = i + 1; j < points.length; j++) {
@@ -2253,7 +3383,9 @@ input, textarea, select { font-family: inherit; }
           ctx.beginPath();
           ctx.moveTo(p.x, p.y);
           ctx.lineTo(p2.x, p2.y);
-          ctx.strokeStyle = 'rgba(0, 51, 102,' + (1 - dist / maxDist) * 0.55 + ')';
+          ctx.strokeStyle = light
+            ? 'rgba(37, 99, 235,' + (1 - dist / maxDist) * 0.28 + ')'
+            : 'rgba(0, 51, 102,' + (1 - dist / maxDist) * 0.55 + ')';
           ctx.lineWidth = 1;
           ctx.stroke();
         }
@@ -2706,6 +3838,21 @@ input, textarea, select { font-family: inherit; }
     if (!privacy.checked) { privacyError.style.display = 'block'; valid = false; }
 
     if (valid) {
+      var nameVal    = document.getElementById('cf-name').value.trim();
+      var emailVal   = document.getElementById('cf-email').value.trim();
+      var subjectVal = document.getElementById('cf-subject').value.trim() || 'Neue Anfrage über NGBuild';
+      var msgVal     = document.getElementById('cf-message').value.trim();
+
+      var body = 'Name: ' + nameVal + '\n'
+               + 'E-Mail: ' + emailVal + '\n\n'
+               + 'Nachricht:\n' + msgVal;
+
+      var mailto = 'mailto:lennartnils979@gmail.com'
+                 + '?subject=' + encodeURIComponent(subjectVal)
+                 + '&body='    + encodeURIComponent(body);
+
+      window.location.href = mailto;
+
       form.style.display = 'none';
       formSuccess.style.display = 'block';
     }
@@ -2756,6 +3903,63 @@ input, textarea, select { font-family: inherit; }
 
     card.addEventListener('pointerleave', function() {
       card.style.setProperty('--edge-proximity', '0');
+    });
+  });
+})();
+</script>
+
+<script>
+/* ===== THEME TOGGLE ===== */
+(function() {
+  var html   = document.documentElement;
+  var btn    = document.getElementById('theme-toggle');
+  var LIGHT  = 'light-mode';
+  var KEY    = 'ngbuild-theme';
+
+  // Gespeicherte Präferenz beim Laden anwenden
+  if (localStorage.getItem(KEY) === 'light') {
+    html.classList.add(LIGHT);
+    btn.setAttribute('aria-pressed', 'true');
+  }
+
+  btn.addEventListener('click', function() {
+    var isLight = html.classList.toggle(LIGHT);
+    btn.setAttribute('aria-pressed', String(isLight));
+    localStorage.setItem(KEY, isLight ? 'light' : 'dark');
+  });
+})();
+
+/* ===== FAQ ACCORDION ===== */
+(function() {
+  var faqItems = document.querySelectorAll('.faq-item');
+  faqItems.forEach(function(item) {
+    var btn = item.querySelector('.faq-question');
+    var answer = item.querySelector('.faq-answer');
+    if (!btn || !answer) return;
+
+    btn.addEventListener('click', function() {
+      var isOpen = item.classList.contains('open');
+
+      // Alle anderen schließen
+      faqItems.forEach(function(other) {
+        if (other !== item) {
+          other.classList.remove('open');
+          var otherBtn = other.querySelector('.faq-question');
+          var otherAns = other.querySelector('.faq-answer');
+          if (otherBtn) otherBtn.setAttribute('aria-expanded', 'false');
+          if (otherAns) otherAns.style.maxHeight = null;
+        }
+      });
+
+      if (isOpen) {
+        item.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+        answer.style.maxHeight = null;
+      } else {
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+      }
     });
   });
 })();

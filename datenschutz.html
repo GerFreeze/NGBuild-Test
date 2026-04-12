@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Datenschutzerklärung — NGBuild</title>
+<meta name="robots" content="noindex, follow">
+<style>
+@font-face {
+  font-family: 'Montserrat';
+  src: url('fonts/montserrat-latin-ext.woff2') format('woff2');
+  font-weight: 700 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Montserrat';
+  src: url('fonts/montserrat-latin.woff2') format('woff2');
+  font-weight: 700 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  --bg: #06080f;
+  --surface: #0e1420;
+  --blue: #2563eb;
+  --blue-light: #60a5fa;
+  --cyan: #38bdf8;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --white: #ffffff;
+  --radius: 12px;
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --nav-height: 64px;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--blue-light); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* NAV */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: var(--nav-height);
+  background: rgba(6,8,15,.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+nav .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--text);
+  text-decoration: none;
+}
+.nav-logo svg { width: 28px; height: 28px; }
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: .88rem;
+  color: var(--text-muted);
+  transition: color .2s;
+  text-decoration: none;
+}
+.back-link:hover { color: var(--white); text-decoration: none; }
+.back-link svg { width: 16px; height: 16px; }
+
+/* CONTENT */
+main {
+  padding: 72px 0 96px;
+}
+.legal-content {
+  max-width: 720px;
+}
+.legal-content h1 {
+  font-family: 'Montserrat', var(--font);
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+}
+.legal-meta {
+  font-size: .85rem;
+  color: var(--text-muted);
+  margin-bottom: 48px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+}
+.legal-content h2 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-top: 36px;
+  margin-bottom: 10px;
+}
+.legal-content h3 {
+  font-size: .98rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-top: 20px;
+  margin-bottom: 8px;
+}
+.legal-content h2:first-of-type { margin-top: 0; }
+.legal-content p,
+.legal-content li {
+  color: var(--text-muted);
+  font-size: .95rem;
+  line-height: 1.8;
+  margin-bottom: 10px;
+}
+.legal-content ul {
+  list-style: disc;
+  padding-left: 22px;
+  margin-bottom: 14px;
+}
+.legal-content a { color: var(--blue-light); }
+.legal-content strong { color: var(--text); font-weight: 600; }
+
+/* FOOTER */
+footer {
+  border-top: 1px solid rgba(255,255,255,.06);
+  padding: 28px 0;
+}
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.footer-copy { font-size: .82rem; color: var(--text-muted); }
+.footer-links { display: flex; gap: 20px; }
+.footer-links a { font-size: .82rem; color: var(--text-muted); text-decoration: none; transition: color .2s; }
+.footer-links a:hover { color: var(--white); }
+.footer-links a[aria-current] { color: var(--blue-light); }
+
+@media (max-width: 768px) {
+  main { padding: 48px 0 64px; }
+  .container { padding: 0 16px; }
+}
+</style>
+</head>
+<body>
+
+<nav aria-label="Navigation">
+  <div class="container">
+    <a href="index.html" class="nav-logo" aria-label="NGBuild – Zur Startseite">
+      <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M30 160V40l50 120V40" stroke="#2563eb" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M170 80a60 60 0 1 1-60-40h0v80h-20" stroke="#2563eb" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+        <line x1="10" y1="185" x2="190" y2="185" stroke="#38bdf8" stroke-width="2"/>
+        <circle cx="10" cy="185" r="3" fill="#38bdf8"/>
+        <circle cx="190" cy="185" r="3" fill="#38bdf8"/>
+      </svg>
+      NGBuild
+    </a>
+    <a href="index.html" class="back-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Zurück zur Startseite
+    </a>
+  </div>
+</nav>
+
+<main>
+  <div class="container">
+    <div class="legal-content">
+      <h1>Datenschutzerklärung</h1>
+      <p class="legal-meta">Stand: April 2026</p>
+
+      <h2>1. Verantwortlicher</h2>
+      <p>
+        Niels Gimmler<br>
+        [STRASSE UND HAUSNUMMER EINTRAGEN]<br>
+        [PLZ ORT EINTRAGEN]<br>
+        E-Mail: <a href="mailto:kontakt@ngbuild.de">kontakt@ngbuild.de</a>
+      </p>
+      <p>Verantwortliche Stelle im Sinne der Datenschutzgesetze, insbesondere der EU-Datenschutzgrundverordnung (DSGVO), ist die oben genannte Person.</p>
+
+      <h2>2. Grundsatz der Datenverarbeitung</h2>
+      <p>Wir nehmen den Schutz Ihrer persönlichen Daten sehr ernst und behandeln Ihre personenbezogenen Daten vertraulich und entsprechend der gesetzlichen Datenschutzvorschriften sowie dieser Datenschutzerklärung. Diese Website erhebt und verarbeitet personenbezogene Daten nur im technisch notwendigen Umfang. Es werden keine Daten an Werbenetzwerke, Analyse-Dienste oder soziale Netzwerke übermittelt.</p>
+
+      <h2>3. Hosting</h2>
+      <p>Diese Website wird gehostet bei:</p>
+      <p>
+        STRATO AG<br>
+        Pascalstraße 10<br>
+        10587 Berlin<br>
+        Deutschland<br>
+        <a href="https://www.strato.de/datenschutz/" target="_blank" rel="noopener noreferrer">Datenschutzerklärung von Strato</a>
+      </p>
+      <p>Bei jedem Aufruf dieser Website werden durch den Hosting-Anbieter automatisch Informationen in sogenannten Server-Logfiles gespeichert. Dies sind:</p>
+      <ul>
+        <li>Browsertyp und Browserversion</li>
+        <li>verwendetes Betriebssystem</li>
+        <li>Referrer URL (zuvor besuchte Seite)</li>
+        <li>Hostname des zugreifenden Rechners</li>
+        <li>Uhrzeit der Serveranfrage</li>
+        <li>IP-Adresse (anonymisiert)</li>
+      </ul>
+      <p>Eine Zusammenführung dieser Daten mit anderen Datenquellen wird nicht vorgenommen. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einem sicheren und störungsfreien Betrieb der Website). Die Daten werden nach spätestens 7 Tagen gelöscht.</p>
+      <p>Mit Strato wurde ein Auftragsverarbeitungsvertrag (AVV) gemäß Art. 28 DSGVO geschlossen. Die Verarbeitung erfolgt ausschließlich auf Servern in Deutschland.</p>
+
+      <h2>4. Kontaktaufnahme</h2>
+      <h3>4.1 Kontaktformular</h3>
+      <p>Auf dieser Website ist ein Kontaktformular vorhanden. Beim Absenden des Formulars öffnet sich Ihr lokal installiertes E-Mail-Programm mit den eingegebenen Daten vorausgefüllt. Die Daten werden dabei nicht durch unsere Website verarbeitet oder gespeichert — die Übertragung erfolgt ausschließlich über Ihr eigenes E-Mail-Programm.</p>
+      <p>Folgende Daten können Sie im Formular eingeben und per E-Mail übermitteln:</p>
+      <ul>
+        <li>Name</li>
+        <li>E-Mail-Adresse</li>
+        <li>Betreff (optional)</li>
+        <li>Ihre Nachricht</li>
+      </ul>
+      <p>Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO (Anbahnung eines Vertragsverhältnisses) sowie Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der Bearbeitung von Anfragen).</p>
+
+      <h3>4.2 E-Mail-Empfang über Gmail</h3>
+      <p>Die von Ihnen gesendeten E-Mails werden über den Dienst Gmail (Google LLC, 1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA) empfangen und gespeichert. Google LLC ist nach dem EU-US Data Privacy Framework zertifiziert, sodass ein angemessenes Datenschutzniveau für Übermittlungen in die USA gewährleistet ist. Die Datenschutzerklärung von Google finden Sie unter: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">https://policies.google.com/privacy</a>.</p>
+      <p>Die per E-Mail übermittelten Daten werden ausschließlich zur Bearbeitung Ihrer Anfrage verwendet und nach Abschluss der Bearbeitung gelöscht, sofern keine gesetzlichen Aufbewahrungspflichten bestehen.</p>
+
+      <h2>5. Cookies und Tracking</h2>
+      <p>Diese Website verwendet keine Cookies. Es werden keine Tracking- oder Analyse-Werkzeuge (z.B. Google Analytics, Matomo) eingesetzt. Es erfolgt keine Weitergabe Ihrer Daten an Dritte zu Werbezwecken.</p>
+
+      <h2>6. Externe Dienste und Schriften</h2>
+      <p>Diese Website lädt keine externen Ressourcen wie Schriftarten, Skripte oder Medien von Drittanbietern. Alle verwendeten Schriften und Skripte sind lokal auf dem Webserver gespeichert. Es werden keine Verbindungen zu externen Servern hergestellt, die zur Identifizierung Ihrer IP-Adresse durch Dritte führen könnten.</p>
+
+      <h2>7. SSL-Verschlüsselung</h2>
+      <p>Diese Website nutzt aus Sicherheitsgründen und zum Schutz der Übertragung vertraulicher Inhalte eine SSL- bzw. TLS-Verschlüsselung. Eine verschlüsselte Verbindung erkennen Sie daran, dass die Adresszeile des Browsers von „http://" auf „https://" wechselt und an dem Schloss-Symbol in Ihrer Browserzeile.</p>
+
+      <h2>8. Ihre Rechte als betroffene Person</h2>
+      <p>Sie haben gegenüber uns folgende Rechte hinsichtlich der Sie betreffenden personenbezogenen Daten:</p>
+      <ul>
+        <li><strong>Recht auf Auskunft</strong> (Art. 15 DSGVO): Sie können Auskunft über Ihre bei uns gespeicherten Daten verlangen.</li>
+        <li><strong>Recht auf Berichtigung</strong> (Art. 16 DSGVO): Sie können die Berichtigung unrichtiger Daten verlangen.</li>
+        <li><strong>Recht auf Löschung</strong> (Art. 17 DSGVO): Sie können die Löschung Ihrer Daten verlangen, sofern keine gesetzlichen Aufbewahrungspflichten bestehen.</li>
+        <li><strong>Recht auf Einschränkung der Verarbeitung</strong> (Art. 18 DSGVO)</li>
+        <li><strong>Recht auf Datenübertragbarkeit</strong> (Art. 20 DSGVO)</li>
+        <li><strong>Widerspruchsrecht</strong> (Art. 21 DSGVO): Sie können der Verarbeitung Ihrer Daten auf Basis von Art. 6 Abs. 1 lit. f DSGVO jederzeit widersprechen.</li>
+      </ul>
+      <p>Zur Ausübung Ihrer Rechte wenden Sie sich bitte an: <a href="mailto:kontakt@ngbuild.de">kontakt@ngbuild.de</a></p>
+
+      <h2>9. Beschwerderecht bei der Aufsichtsbehörde</h2>
+      <p>Sie haben das Recht, sich bei einer Datenschutz-Aufsichtsbehörde über die Verarbeitung Ihrer personenbezogenen Daten durch uns zu beschweren. Die für uns zuständige Aufsichtsbehörde richtet sich nach dem Bundesland des Verantwortlichen. Eine Liste aller deutschen Datenschutzbehörden finden Sie unter: <a href="https://www.bfdi.bund.de/DE/Infothek/Anschriften_Links/anschriften_links-node.html" target="_blank" rel="noopener noreferrer">bfdi.bund.de</a>.</p>
+
+      <h2>10. Aktualität dieser Datenschutzerklärung</h2>
+      <p>Diese Datenschutzerklärung ist aktuell gültig und hat den Stand April 2026. Durch die Weiterentwicklung unserer Website oder aufgrund geänderter gesetzlicher Vorgaben kann es notwendig werden, diese Datenschutzerklärung anzupassen. Die jeweils aktuelle Version ist jederzeit auf dieser Seite abrufbar.</p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <span class="footer-copy">&copy; 2026 NGBuild. Alle Rechte vorbehalten.</span>
+      <div class="footer-links">
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html" aria-current="page">Datenschutz</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
