@@ -2,6 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
+<script>var _t=localStorage.getItem('ngbuild-theme');if(_t==='light'||(!_t&&matchMedia('(pointer:coarse)').matches&&matchMedia('(prefers-color-scheme:light)').matches))document.documentElement.classList.add('light-mode');</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Impressum — NGBuild</title>
 <meta name="robots" content="noindex, follow">
@@ -35,7 +36,37 @@
   --radius: 12px;
   --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --nav-height: 64px;
+  color-scheme: dark;
 }
+
+html.light-mode {
+  --bg: #f0f4f8;
+  --surface: #ffffff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --white: #1e293b;
+  color-scheme: light;
+}
+html.light-mode body { background: var(--bg); color: var(--text); }
+html.light-mode nav {
+  background: rgba(240,244,248,.85);
+  border-bottom-color: rgba(0,0,0,.08);
+}
+html.light-mode .back-link:hover { color: var(--text); }
+html.light-mode .legal-meta { border-bottom-color: rgba(0,0,0,.07); }
+html.light-mode .legal-content h2 { color: var(--text); }
+html.light-mode footer { border-top-color: rgba(0,0,0,.07); }
+html.light-mode .footer-links a:hover { color: var(--text); }
+
+html.light-mode #theme-toggle {
+  background: rgba(37,99,235,.12);
+  border-color: rgba(37,99,235,.25);
+}
+html.light-mode .toggle-thumb { transform: translateX(18px); background: #fff; }
+html.light-mode .toggle-icon-moon { opacity: 0; transform: rotate(-90deg) scale(.6); }
+html.light-mode .toggle-icon-sun  { opacity: 1; transform: rotate(0deg) scale(1); }
+
+body, nav, footer { transition: background-color .35s ease, border-color .35s ease, color .2s ease; }
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
@@ -83,6 +114,11 @@ nav .container {
   text-decoration: none;
 }
 .nav-logo svg { width: 28px; height: 28px; }
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
 .back-link {
   display: inline-flex;
   align-items: center;
@@ -94,6 +130,46 @@ nav .container {
 }
 .back-link:hover { color: var(--white); text-decoration: none; }
 .back-link svg { width: 16px; height: 16px; }
+
+/* THEME TOGGLE */
+#theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 26px;
+  border-radius: 13px;
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.15);
+  cursor: pointer;
+  position: relative;
+  transition: background .3s, border-color .3s;
+  flex-shrink: 0;
+  padding: 0;
+}
+#theme-toggle:hover { background: rgba(255,255,255,.18); border-color: rgba(255,255,255,.3); }
+#theme-toggle:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; }
+.toggle-thumb {
+  position: absolute;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,.3);
+  transition: transform .35s cubic-bezier(.34,1.56,.64,1), background .3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.toggle-icon {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  transition: opacity .25s ease, transform .35s ease;
+}
+.toggle-icon-moon { opacity: 1; transform: rotate(0deg) scale(1); color: #2563eb; }
+.toggle-icon-sun  { opacity: 0; transform: rotate(90deg) scale(.6); color: #f59e0b; }
 
 /* CONTENT */
 main {
@@ -166,16 +242,21 @@ footer {
 
 <nav aria-label="Navigation">
   <div class="container">
-    <a href="index.html" class="nav-logo" aria-label="NGBuild – Zur Startseite">
-      <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M30 160V40l50 120V40" stroke="#2563eb" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M170 80a60 60 0 1 1-60-40h0v80h-20" stroke="#2563eb" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-        <line x1="10" y1="185" x2="190" y2="185" stroke="#38bdf8" stroke-width="2"/>
-        <circle cx="10" cy="185" r="3" fill="#38bdf8"/>
-        <circle cx="190" cy="185" r="3" fill="#38bdf8"/>
-      </svg>
-      NGBuild
-    </a>
+    <div class="nav-left">
+      <a href="index.html" class="nav-logo" aria-label="NGBuild – Zur Startseite">
+        <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M30 160V40l50 120V40" stroke="#2563eb" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M170 80a60 60 0 1 1-60-40h0v80h-20" stroke="#2563eb" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        NGBuild
+      </a>
+      <button id="theme-toggle" aria-label="Hell-/Dunkelmodus wechseln" aria-pressed="false">
+        <span class="toggle-thumb">
+          <svg class="toggle-icon toggle-icon-moon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/></svg>
+          <svg class="toggle-icon toggle-icon-sun" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3" stroke="currentColor" stroke-width="2"/><line x1="12" y1="21" x2="12" y2="23" stroke="currentColor" stroke-width="2"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64" stroke="currentColor" stroke-width="2"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78" stroke="currentColor" stroke-width="2"/><line x1="1" y1="12" x2="3" y2="12" stroke="currentColor" stroke-width="2"/><line x1="21" y1="12" x2="23" y2="12" stroke="currentColor" stroke-width="2"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36" stroke="currentColor" stroke-width="2"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22" stroke="currentColor" stroke-width="2"/></svg>
+        </span>
+      </button>
+    </div>
     <a href="index.html" class="back-link">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
       Zurück zur Startseite
@@ -228,5 +309,23 @@ footer {
   </div>
 </footer>
 
+<script>
+(function() {
+  var html = document.documentElement;
+  var btn  = document.getElementById('theme-toggle');
+  var LIGHT = 'light-mode';
+  var KEY   = 'ngbuild-theme';
+
+  if (html.classList.contains(LIGHT)) {
+    btn.setAttribute('aria-pressed', 'true');
+  }
+
+  btn.addEventListener('click', function() {
+    var isLight = html.classList.toggle(LIGHT);
+    btn.setAttribute('aria-pressed', String(isLight));
+    localStorage.setItem(KEY, isLight ? 'light' : 'dark');
+  });
+})();
+</script>
 </body>
 </html>
