@@ -638,6 +638,13 @@ html.light-mode .nav-cta { color: #fff; }
 #mobile-nav.open a:nth-child(8) { transition-delay: .26s; }
 #mobile-nav.open a:nth-child(9) { transition-delay: .29s; }
 #mobile-nav .mobile-sub { padding-left: 20px; font-size: 1rem; color: var(--text-muted); }
+#mobile-nav .btn-primary { justify-content: center; width: 100%; }
+@keyframes navCtaFlash {
+  0%   { box-shadow: none; }
+  50%  { box-shadow: 0 0 22px rgba(37,99,235,.75), 0 0 8px rgba(96,165,250,.5); }
+  100% { box-shadow: none; }
+}
+#mobile-nav.open .btn-primary { animation: navCtaFlash .55s ease .42s both; }
 /* scroll progress */
 #scroll-progress {
   position: fixed;
@@ -2325,18 +2332,7 @@ html.light-mode .nav-cta { color: #fff; }
       </button>
     </div>
     <div class="nav-links">
-      <div class="nav-dropdown" id="nav-dropdown">
-        <button class="nav-dropdown-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="dropdown-menu">
-          Leistungen
-          <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 11.168l3.71-3.938a.75.75 0 1 1 1.08 1.04l-4.25 4.5a.75.75 0 0 1-1.08 0l-4.25-4.5a.75.75 0 0 1 .02-1.06z"/></svg>
-        </button>
-        <div class="nav-dropdown-menu" id="dropdown-menu" role="menu">
-          <a href="#leistungen" role="menuitem">Webdesign &amp; Entwicklung</a>
-          <a href="#leistungen" role="menuitem">Landingpages</a>
-          <a href="#leistungen" role="menuitem">Individuelle Lösungen</a>
-          <a href="#leistungen" role="menuitem">SEO-Optimierung</a>
-        </div>
-      </div>
+      <a href="#leistungen">Leistungen</a>
       <a href="#preise">Preise</a>
       <a href="#portfolio">Referenzen</a>
       <a href="#ueber-uns">Über mich</a>
@@ -2353,15 +2349,11 @@ html.light-mode .nav-cta { color: #fff; }
 <!-- Mobile Nav -->
 <div id="mobile-nav" aria-label="Mobile Navigation">
   <a href="#leistungen">Leistungen</a>
-  <a href="#leistungen" class="mobile-sub">Webdesign &amp; Entwicklung</a>
-  <a href="#leistungen" class="mobile-sub">Landingpages</a>
-  <a href="#leistungen" class="mobile-sub">Individuelle Lösungen</a>
-  <a href="#leistungen" class="mobile-sub">SEO-Optimierung</a>
   <a href="#preise">Preise</a>
   <a href="#portfolio">Referenzen</a>
   <a href="#ueber-uns">Über mich</a>
   <a href="#kontakt">Kontakt</a>
-  <a href="#kontakt" class="btn-primary" style="text-align:center;margin-top:16px;">Kostenlos beraten lassen</a>
+  <a href="#kontakt" class="btn-primary" style="margin-top:16px;">Kostenlos beraten lassen</a>
 </div>
 
 <!-- ===== HERO ===== -->
@@ -3717,7 +3709,16 @@ html.light-mode .nav-cta { color: #fff; }
     }
 
     buildPath();
-    window.addEventListener('resize', buildPath);
+
+    var _lastBuildW = window.innerWidth;
+    var _resizeTimer;
+    window.addEventListener('resize', function() {
+      var w = window.innerWidth;
+      if (Math.abs(w - _lastBuildW) < 5) return; /* iOS URL-Bar: nur Höhe ändert sich → ignorieren */
+      _lastBuildW = w;
+      clearTimeout(_resizeTimer);
+      _resizeTimer = setTimeout(buildPath, 150);
+    });
   })();
 
   /* ===== COUNTER ANIMATION ===== */
